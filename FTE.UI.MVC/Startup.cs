@@ -1,8 +1,6 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿using Owin;
 
-[assembly: OwinStartupAttribute(typeof(FTE.UI.MVC.Startup))]
-namespace FTE.UI.MVC
+namespace IdentitySample
 {
     public partial class Startup
     {
