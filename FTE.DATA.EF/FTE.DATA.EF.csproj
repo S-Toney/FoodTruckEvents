@@ -71,6 +71,7 @@
     <Compile Include="Location.cs">
       <DependentUpon>FoodTruckEventsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Metadata\FTEDBMetadata.cs" />
     <Compile Include="OwnerAsset.cs">
       <DependentUpon>FoodTruckEventsModel.tt</DependentUpon>
     </Compile>
