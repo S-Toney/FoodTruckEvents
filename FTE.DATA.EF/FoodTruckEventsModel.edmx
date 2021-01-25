@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FTEDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="EventDate" Type="date" Nullable="false" />
+          <Property Name="IsCancelled" Type="bit" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="ZipCode" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="ReservationLimit" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OwnerAssets">
+          <Key>
+            <PropertyRef Name="OwnerAssetID" />
+          </Key>
+          <Property Name="OwnerAssetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TruckName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TruckFoodTypeID" Type="int" Nullable="false" />
+          <Property Name="TruckPhoto" Type="varchar" MaxLength="100" />
+          <Property Name="OwnerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SpecialNotes" Type="varchar" MaxLength="300" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservations">
+          <Key>
+            <PropertyRef Name="ReservationID" />
+          </Key>
+          <Property Name="ReservationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OwnerAssetID" Type="int" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="ReservationDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TruckFoodType">
+          <Key>
+            <PropertyRef Name="TruckFoodTypeID" />
+          </Key>
+          <Property Name="TruckFoodTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cuisine" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Events_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnerAssets_TruckFoodType">
+          <End Role="TruckFoodType" Type="Self.TruckFoodType" Multiplicity="1" />
+          <End Role="OwnerAssets" Type="Self.OwnerAssets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TruckFoodType">
+              <PropertyRef Name="TruckFoodTypeID" />
+            </Principal>
+            <Dependent Role="OwnerAssets">
+              <PropertyRef Name="TruckFoodTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnerAssets_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="OwnerAssets" Type="Self.OwnerAssets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OwnerAssets">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservations_Events">
+          <End Role="Events" Type="Self.Events" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservations_OwnerAssets">
+          <End Role="OwnerAssets" Type="Self.OwnerAssets" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OwnerAssets">
+              <PropertyRef Name="OwnerAssetID" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="OwnerAssetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FTEDBModelStoreContainer">
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OwnerAssets" EntityType="Self.OwnerAssets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TruckFoodType" EntityType="Self.TruckFoodType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Events_Locations" Association="Self.FK_Events_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnerAssets_TruckFoodType" Association="Self.FK_OwnerAssets_TruckFoodType">
+            <End Role="TruckFoodType" EntitySet="TruckFoodType" />
+            <End Role="OwnerAssets" EntitySet="OwnerAssets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnerAssets_UserDetails" Association="Self.FK_OwnerAssets_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="OwnerAssets" EntitySet="OwnerAssets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservations_Events" Association="Self.FK_Reservations_Events">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservations_OwnerAssets" Association="Self.FK_Reservations_OwnerAssets">
+            <End Role="OwnerAssets" EntitySet="OwnerAssets" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FTEDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Events_Locations" FromRole="Events" ToRole="Locations" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservations_Events" FromRole="Events" ToRole="Reservations" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ReservationLimit" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Events" Relationship="Self.FK_Events_Locations" FromRole="Locations" ToRole="Events" />
+        </EntityType>
+        <EntityType Name="OwnerAsset">
+          <Key>
+            <PropertyRef Name="OwnerAssetID" />
+          </Key>
+          <Property Name="OwnerAssetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TruckName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TruckFoodTypeID" Type="Int32" Nullable="false" />
+          <Property Name="TruckPhoto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OwnerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SpecialNotes" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="TruckFoodType" Relationship="Self.FK_OwnerAssets_TruckFoodType" FromRole="OwnerAssets" ToRole="TruckFoodType" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK_OwnerAssets_UserDetails" FromRole="OwnerAssets" ToRole="UserDetails" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservations_OwnerAssets" FromRole="OwnerAssets" ToRole="Reservations" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReservationID" />
+          </Key>
+          <Property Name="ReservationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OwnerAssetID" Type="Int32" Nullable="false" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="ReservationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_Reservations_Events" FromRole="Reservations" ToRole="Events" />
+          <NavigationProperty Name="OwnerAsset" Relationship="Self.FK_Reservations_OwnerAssets" FromRole="Reservations" ToRole="OwnerAssets" />
+        </EntityType>
+        <EntityType Name="TruckFoodType">
+          <Key>
+            <PropertyRef Name="TruckFoodTypeID" />
+          </Key>
+          <Property Name="TruckFoodTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cuisine" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OwnerAssets" Relationship="Self.FK_OwnerAssets_TruckFoodType" FromRole="TruckFoodType" ToRole="OwnerAssets" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="OwnerAssets" Relationship="Self.FK_OwnerAssets_UserDetails" FromRole="UserDetails" ToRole="OwnerAssets" />
+        </EntityType>
+        <Association Name="FK_Events_Locations">
+          <End Role="Locations" Type="Self.Location" Multiplicity="1" />
+          <End Role="Events" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservations_Events">
+          <End Role="Events" Type="Self.Event" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnerAssets_TruckFoodType">
+          <End Role="TruckFoodType" Type="Self.TruckFoodType" Multiplicity="1" />
+          <End Role="OwnerAssets" Type="Self.OwnerAsset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TruckFoodType">
+              <PropertyRef Name="TruckFoodTypeID" />
+            </Principal>
+            <Dependent Role="OwnerAssets">
+              <PropertyRef Name="TruckFoodTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnerAssets_UserDetails">
+          <End Role="UserDetails" Type="FTEDBModel.UserDetails" Multiplicity="1" />
+          <End Role="OwnerAssets" Type="Self.OwnerAsset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OwnerAssets">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservations_OwnerAssets">
+          <End Role="OwnerAssets" Type="Self.OwnerAsset" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OwnerAssets">
+              <PropertyRef Name="OwnerAssetID" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="OwnerAssetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FTEDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="OwnerAssets" EntityType="Self.OwnerAsset" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="TruckFoodTypes" EntityType="Self.TruckFoodType" />
+          <EntitySet Name="UserDetails1" EntityType="FTEDBModel.UserDetails" />
+          <AssociationSet Name="FK_Events_Locations" Association="Self.FK_Events_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservations_Events" Association="Self.FK_Reservations_Events">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnerAssets_TruckFoodType" Association="Self.FK_OwnerAssets_TruckFoodType">
+            <End Role="TruckFoodType" EntitySet="TruckFoodTypes" />
+            <End Role="OwnerAssets" EntitySet="OwnerAssets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnerAssets_UserDetails" Association="Self.FK_OwnerAssets_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails1" />
+            <End Role="OwnerAssets" EntitySet="OwnerAssets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservations_OwnerAssets" Association="Self.FK_Reservations_OwnerAssets">
+            <End Role="OwnerAssets" EntitySet="OwnerAssets" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FTEDBModelStoreContainer" CdmEntityContainer="FTEDBEntities">
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="FTEDBModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="IsCancelled" ColumnName="IsCancelled" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="FTEDBModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="ReservationLimit" ColumnName="ReservationLimit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OwnerAssets">
+            <EntityTypeMapping TypeName="FTEDBModel.OwnerAsset">
+              <MappingFragment StoreEntitySet="OwnerAssets">
+                <ScalarProperty Name="OwnerAssetID" ColumnName="OwnerAssetID" />
+                <ScalarProperty Name="TruckName" ColumnName="TruckName" />
+                <ScalarProperty Name="TruckFoodTypeID" ColumnName="TruckFoodTypeID" />
+                <ScalarProperty Name="TruckPhoto" ColumnName="TruckPhoto" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="SpecialNotes" ColumnName="SpecialNotes" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="FTEDBModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservations">
+                <ScalarProperty Name="ReservationID" ColumnName="ReservationID" />
+                <ScalarProperty Name="OwnerAssetID" ColumnName="OwnerAssetID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="ReservationDate" ColumnName="ReservationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TruckFoodTypes">
+            <EntityTypeMapping TypeName="FTEDBModel.TruckFoodType">
+              <MappingFragment StoreEntitySet="TruckFoodType">
+                <ScalarProperty Name="TruckFoodTypeID" ColumnName="TruckFoodTypeID" />
+                <ScalarProperty Name="Cuisine" ColumnName="Cuisine" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails1">
+            <EntityTypeMapping TypeName="FTEDBModel.UserDetails">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

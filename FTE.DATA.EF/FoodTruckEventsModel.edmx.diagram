@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ab94f66666bc489b8d624bc281d3e6c2" Name="Diagram1">
+        <EntityTypeShape EntityType="FTEDBModel.Event" Width="1.5" PointX="7.375" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTEDBModel.Location" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTEDBModel.OwnerAsset" Width="1.5" PointX="3.125" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTEDBModel.Reservation" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTEDBModel.TruckFoodType" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTEDBModel.UserDetails" Width="1.5" PointX="0.875" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="FTEDBModel.FK_Events_Locations" ManuallyRouted="false" />
+        <AssociationConnector Association="FTEDBModel.FK_Reservations_Events" ManuallyRouted="false" />
+        <AssociationConnector Association="FTEDBModel.FK_OwnerAssets_TruckFoodType" ManuallyRouted="false" />
+        <AssociationConnector Association="FTEDBModel.FK_OwnerAssets_UserDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="FTEDBModel.FK_Reservations_OwnerAssets" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
