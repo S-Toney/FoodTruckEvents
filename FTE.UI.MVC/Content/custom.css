@@ -1,7 +1,22 @@
 ﻿body {
+    padding-top: 45px;
 }
 
-.white-pnkO {
-    color: #FFF;
-    border: 1px solid #F82249;
+.btn-default {
+    color: #fff;
+    background-color: #f82249;
+    padding: 7px 22px;
+    border-radius: 50px;
+    border: 2px solid #f82249;
+    transition: all ease-in-out 0.3s;
+    font-weight: 500;
+    margin-left: 8px;
+    margin-top: 2px;
+    line-height: 1;
+    font-size: 13px;
 }
+
+    .btn-default:hover {
+        color: #fff;
+        background-color: #0B1126;
+    }
