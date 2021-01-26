@@ -1,0 +1,53 @@
+﻿@model IEnumerable<FTE.DATA.EF.Location>
+
+@{
+    ViewBag.Title = "Locations";
+}
+<section id="contact" class="section-bg">
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+            <h2>@ViewBag.Title</h2>
+            <p>
+                <a href="@Url.Action("Create", "Locations")" class="btn btn-default">Add a Location</a>
+            </p>
+        </div>
+
+        <div class="row">
+            @*contact-info*@
+            <table class="table">
+                <tr class="text-center">
+                    <th>
+                        Event Location
+                    </th>
+                    <th>
+                        State
+                    </th>
+                    <th>
+                        Reservation Limit
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Details", "Locations", new { id = item.LocationID })">@Html.DisplayFor(modelItem => item.LocationName)</a>
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.State)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.ReservationLimit)
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", "Locations", new { id = item.LocationID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
+                            <a href="@Url.Action("Delete", "Locations", new { id = item.LocationID })" class="mx-3"><i class="fas fa-trash fa-2x"></i></a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+</section>
