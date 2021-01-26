@@ -100,7 +100,7 @@ namespace FTE.DATA.EF//.Metadata
             [Required(ErrorMessage ="* Truck is Required")]
             [Display(Name ="Truck")]
             public int OwnerAssetID { get; set; }
-            [Required(ErrorMessage ="* Event is Required"]
+            [Required(ErrorMessage ="* Event is Required")]
             [Display(Name ="Event")]
             public int EventID { get; set; }
             [Required(ErrorMessage ="* Reservation Date is Required")]
