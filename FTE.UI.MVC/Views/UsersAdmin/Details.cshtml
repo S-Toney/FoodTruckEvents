@@ -3,43 +3,44 @@
 @{
     ViewBag.Title = "Details";
 }
+<section id="contact" class="section-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <p>@ViewBag.Title</p>
+            <h2>@Model.UserName</h2>
+            <p class="text-center">
+                <a href="@Url.Action("Edit", "UsersAdmin", new { id = Model.Id })" class="mx-2"><i class="fas fa-pen-square fa-2x pl-03"></i></a>
+                <a href="@Url.Action("Index", "UsersAdmin")" class="mx-2"><i class="fas fa-caret-square-left fa-2x"></i></a>
+            </p>
+        </div>
+        <div class="row contact-info">
 
-<h2>Details.</h2>
+            <div class="col-md-4">
 
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-    </dl>
-</div>
-<h4>List of roles for this user</h4>
-@if (ViewBag.RoleNames.Count == 0)
-{
-    <hr />
-    <p>No roles found for this user.</p>
-}
+            </div>
 
-<table class="table">
+            <div class="col-md-4 text-md">
+                <strong>Roles:</strong><br />
+                @if (ViewBag.RoleNames.Count == 0)
+                {
+                    <p>No roles found for this user.</p>
+                }
 
-    @foreach (var item in ViewBag.RoleNames)
-    {
-        <tr>
-            <td>
-                @item
-            </td>
-        </tr>
-    }
-</table>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                @foreach (var item in ViewBag.RoleNames)
+                {
+
+                    <p class="m-2">@item</p>
+
+                }
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
+
+        </div>
+    </div>
+</section>
 
 
 
