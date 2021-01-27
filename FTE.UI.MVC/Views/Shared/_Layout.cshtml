@@ -51,21 +51,21 @@
             <div id="logo" class="pull-left">
                 <!-- Uncomment below if you prefer to use a text logo -->
                 <h1>
-                    <img src="~/Content/images/favicon-32x32.png" /> <a href="#intro">FT<span>Events</span></a>
+                    <img src="~/Content/images/favicon-32x32.png" /> <a href="@Url.Action("Index", "Home")">FT<span>Events</span></a>
                 </h1>
                 <!-- <a href="index.html" class="scrollto"><img src="assets/img/logo.png" alt="" title=""></a>-->
             </div>
             <!-- Nav -->
-            <nav id="nav-menu-container" >
+            <nav id="nav-menu-container">
                 <ul class="nav-menu">
                     <li class="menu-active"><a href="@Url.Action("Index", "Home")">Home</a></li>
                     <li><a href="@Url.Action("About", "Home")">About</a></li>
                     <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
                     @*<li><a href="#schedule">Schedule</a></li>
-        <li><a href="#venue">Venue</a></li>
-        <li><a href="#hotels">Hotels</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#supporters">Sponsors</a></li>*@
+                        <li><a href="#venue">Venue</a></li>
+                        <li><a href="#hotels">Hotels</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#supporters">Sponsors</a></li>*@
                     <!-- Admininstration Dropdown -->
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
@@ -121,7 +121,7 @@
                     {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Administration
+                                System Administrator
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="@Url.Action("Index", "Locations")">Locations</a>
@@ -140,6 +140,7 @@
                         </li>
                     }
                     <!-- End System Adminsitrator Dropdown -->
+                    <li><a class="dropdown-item" href="@Url.Action("Index", "RolesAdmin")">Roles Admin</a></li>
                     <li><a href="@Url.Action("Login", "Account")">Login</a></li>
                     <li class="buy-tickets"><a href="#buy-tickets">Event Scheduler</a></li>
                 </ul>
@@ -153,77 +154,77 @@
     <div class="container body-content pt-3">
         @RenderBody()
     </div>
-        <!-- Footer -->
-        <footer id="footer">
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
 
-                        <div class="col-lg-3 col-md-6 footer-info">
-                            <h1>
-                                <img src="~/Content/images/favicon-32x32.png" /> <a href="#intro">FT<span>Events</span></a>
-                            </h1>
-                            <p>In alias aperiam. Placeat tempore facere. Officiis voluptate ipsam vel eveniet est dolor et totam porro. Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In inventore consequatur ad voluptate cupiditate debitis accusamus repellat cumque.</p>
-                            
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 footer-links">
-                            <h4>Useful Links</h4>
-                            <ul>
-                                <li><i class="fas fa-angle-right"></i> <a href="#">Home</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="#">About us</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="#">Services</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="#">Terms of service</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="#">Privacy policy</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 footer-links">
-                            <h4>Useful Links</h4>
-                            <ul>
-                                <li><i class="fas fa-angle-right"></i> <a href="#">Home</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="#">About us</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="#">Services</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="#">Terms of service</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="#">Privacy policy</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 footer-contact">
-                            <h4>Contact Us</h4>
-                            <p>
-                                2200 N Event Ln <br>
-                                Topeka, KS 66618<br>
-                                United States <br>
-                                <strong>Phone:</strong> +1 555-867-5309<br>
-                                <strong>Email:</strong> info@FTEvents.com<br>
-                            </p>
-                            <div class="copyright">
-                                &copy; @DateTime.Now.Year
-                            </div>
-                            @*<div class="social-links">
-            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-            <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
-        </div>*@
-
-                        </div>
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <h1>
+                            <img src="~/Content/images/favicon-32x32.png" /> <a href="#intro">FT<span>Events</span></a>
+                        </h1>
+                        <p>In alias aperiam. Placeat tempore facere. Officiis voluptate ipsam vel eveniet est dolor et totam porro. Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In inventore consequatur ad voluptate cupiditate debitis accusamus repellat cumque.</p>
 
                     </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="fas fa-angle-right"></i> <a href="#">Home</a></li>
+                            <li><i class="fas fa-angle-right"></i> <a href="#">About us</a></li>
+                            <li><i class="fas fa-angle-right"></i> <a href="#">Services</a></li>
+                            <li><i class="fas fa-angle-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="fas fa-angle-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="fas fa-angle-right"></i> <a href="#">Home</a></li>
+                            <li><i class="fas fa-angle-right"></i> <a href="#">About us</a></li>
+                            <li><i class="fas fa-angle-right"></i> <a href="#">Services</a></li>
+                            <li><i class="fas fa-angle-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="fas fa-angle-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Contact Us</h4>
+                        <p>
+                            2200 N Event Ln <br>
+                            Topeka, KS 66618<br>
+                            United States <br>
+                            <strong>Phone:</strong> +1 555-867-5309<br>
+                            <strong>Email:</strong> info@FTEvents.com<br>
+                        </p>
+                        <div class="copyright">
+                            &copy; @DateTime.Now.Year
+                        </div>
+                        @*<div class="social-links">
+                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                                <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                            </div>*@
+
+                    </div>
+
                 </div>
             </div>
-        </footer>
-        <!-- End Footer -->
+        </div>
+    </footer>
+    <!-- End Footer -->
 
-        <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+    <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-        <!-- Default Footer
+    <!-- Default Footer
     <footer>
         <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
     </footer>-->
-    
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

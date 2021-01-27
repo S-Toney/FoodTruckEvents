@@ -1,10 +1,51 @@
 ﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
 
+
 @{
     ViewBag.Title = "Details";
 }
+<section id="contact" class="section-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <p>@ViewBag.Title</p>
+                <h2>@Model.Name</h2>
 
-<h2>Details.</h2>
+            <p class="text-center">
+                @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                {
+                    <a href="@Url.Action("Edit", "RolesAdmin", new { id = Model.Id })" class="mx-2"><i class="fas fa-pen-square fa-2x pl-03"></i></a>
+                }
+                <a href="@Url.Action("Index", "RolesAdmin")" class="mx-2"><i class="fas fa-caret-square-left fa-2x pl-03"></i></a>
+            </p>
+        </div>
+        <div class="row contact-info">
+
+            <div class="col-md-4">
+
+            </div>
+
+            <div class="col-md-4 text-md">
+                <strong>Users in this Role:</strong><br />
+                @if (Model.Users.Count == 0)
+                {
+                    <p class="my-2">No roles found for this user.</p>
+                }
+
+                @foreach (var item in ViewBag.Users)
+                {
+                    <p class="my-2">@item.UserName</p>
+                }
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@*<h2>Details.</h2>
 
 <div>
     <h4>Roles.</h4>
@@ -39,7 +80,7 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@
 
 
 

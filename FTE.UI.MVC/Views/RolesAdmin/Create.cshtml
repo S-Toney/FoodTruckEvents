@@ -1,41 +1,39 @@
 ﻿@model IdentitySample.Models.RoleViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create a Role";
 }
 
-<h2>Create.</h2>
-
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "RolesAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Role.</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name)
+    <section id="contact" class="section-bg">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>@ViewBag.Title</h2>
+                <p class="mx-auto">
+                    <a href="@Url.Action("Index", "RolesAdmin")"><i class="fas fa-caret-square-left fa-2x pl-03"></i></a>
+                </p>
+            </div>
+            <div class="row contact-info">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4 justify-content-center align-items-center">
+                    <div class="align-items-center">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Role Name" } })
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <input type="submit" value="Add Role" class="btn btn-default" />
+                        </div>
+                </div>
+                <div class="col-md-4">
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+    </section>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

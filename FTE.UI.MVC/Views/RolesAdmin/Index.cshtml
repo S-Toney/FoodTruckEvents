@@ -1,36 +1,42 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Roles";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
+<section id="contact" class="section-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <h2>@ViewBag.Title</h2>
+                <p class="mx-auto">
+                    <a href="@Url.Action("Create", "RolesAdmin")"><i class="fas fa-plus-square fa-2x pl-03"></i></a>
+                </p>
+        </div>
+        <div class="row mx-auto">
+            <table class="table">
+                <tr>
+                    <th>
+                        Role Name:
+                    </th>
+                        <th>
 
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-
-</table>
+                        </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Details", "RolesAdmin", new { id = item.Id })">@Html.DisplayFor(modelItem => item.Name)</a>
+                        </td>                      
+                        <td>
+                            <a href="@Url.Action("Edit", "RolesAdmin", new { id = item.Id })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
+                            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                            {<a href="@Url.Action("Delete", "RolesAdmin", new { id = item.Id })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>   }
+                            </td>                   
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</section>

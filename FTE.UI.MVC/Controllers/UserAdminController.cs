@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace IdentitySample.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   
     public class UsersAdminController : Controller
     {
         public UsersAdminController()
@@ -51,6 +51,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Users/
+        [Authorize(Roles = "SysAdmin, Admin")]
         [HttpGet]
         public async Task<ActionResult> Index()
         {
@@ -59,6 +60,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Users/Details/5
+        [Authorize(Roles = "SysAdmin, Admin")]
         [HttpGet]
         public async Task<ActionResult> Details(string id)
         {
@@ -75,6 +77,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Users/Create
+        [Authorize(Roles = "SysAdmin")]
         [HttpGet]
         public async Task<ActionResult> Create()
         {
@@ -123,6 +126,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Users/Edit/1
+        [Authorize(Roles = "SysAdmin")]
         [HttpGet]
         public async Task<ActionResult> Edit(string id)
         {
@@ -194,6 +198,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Users/Delete/5
+        [Authorize(Roles = "SysAdmin")]
         [HttpGet]
         public async Task<ActionResult> Delete(string id)
         {

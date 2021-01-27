@@ -12,7 +12,7 @@ using FTE.UI.MVC.Models;
 
 namespace IdentitySample.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "SysAdmin, Admin")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()
@@ -152,6 +152,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Roles/Delete/5
+        [Authorize(Roles = "SysAdmin")]
         [HttpGet]
         public async Task<ActionResult> Delete(string id)
         {

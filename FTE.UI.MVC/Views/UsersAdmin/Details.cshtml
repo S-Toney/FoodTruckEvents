@@ -2,16 +2,28 @@
 
 @{
     ViewBag.Title = "Details";
+    string userName = Model.Email.Substring(0, Model.Email.IndexOf('@'));
+    string userDomain = Model.Email.Substring(Model.Email.IndexOf('@'));
 }
 <section id="contact" class="section-bg">
     <div class="container" data-aos="fade-up">
         <div class="section-header">
             <p>@ViewBag.Title</p>
-            <h2>@Model.UserName</h2>
-            <p class="text-center">
-                <a href="@Url.Action("Edit", "UsersAdmin", new { id = Model.Id })" class="mx-2"><i class="fas fa-pen-square fa-2x pl-03"></i></a>
-                <a href="@Url.Action("Index", "UsersAdmin")" class="mx-2"><i class="fas fa-caret-square-left fa-2x"></i></a>
-            </p>
+            @if (Model.Email.Length > 15)
+            {
+                <h2>@userName<br />@userDomain</h2>
+            }
+            else
+            {
+                <h2>@Model.Email</h2>
+            }
+                <p class="text-center">
+                    @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                    {
+                        <a href="@Url.Action("Edit", "UsersAdmin", new { id = Model.Id })" class="mx-2"><i class="fas fa-pen-square fa-2x pl-03"></i></a>
+                    }
+                        <a href="@Url.Action("Index", "UsersAdmin")" class="mx-2"><i class="fas fa-caret-square-left fa-2x pl-03"></i></a>
+                    </p>
         </div>
         <div class="row contact-info">
 
