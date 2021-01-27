@@ -56,16 +56,90 @@
                 <!-- <a href="index.html" class="scrollto"><img src="assets/img/logo.png" alt="" title=""></a>-->
             </div>
             <!-- Nav -->
-            <nav id="nav-menu-container">
+            <nav id="nav-menu-container" >
                 <ul class="nav-menu">
                     <li class="menu-active"><a href="@Url.Action("Index", "Home")">Home</a></li>
                     <li><a href="@Url.Action("About", "Home")">About</a></li>
                     <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
                     @*<li><a href="#schedule">Schedule</a></li>
-                    <li><a href="#venue">Venue</a></li>
-                    <li><a href="#hotels">Hotels</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#supporters">Sponsors</a></li>*@
+        <li><a href="#venue">Venue</a></li>
+        <li><a href="#hotels">Hotels</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#supporters">Sponsors</a></li>*@
+                    <!-- Admininstration Dropdown -->
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Administration
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Index", "Locations")">Locations</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Events")">Events</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Reservations")">Reservations</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">Owners</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("Index", "RolesAdmin")">Roles</a>
+                                @*<a class="dropdown-item" href="@Url.Action("Index", "Employees")">Employees</a>*@
+                                <a class="dropdown-item" href="@Url.Action("Index", "ReservationLimits")">Reservation Limits</a>
+                            </div>
+                        </li>
+                    }
+                    <!-- End Admininstration Dropdown -->
+                    <!-- Employee Dropdown -->
+                    @if (Request.IsAuthenticated && User.IsInRole("Employee"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Employee
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("", "")">Reseration Report</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Events")">Events</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Reservations")">Resercations</a>
+                            </div>
+                        </li>
+                    }
+                    <!-- End Employee Dropdown -->
+                    <!-- Owner Dropdown -->
+                    @if (Request.IsAuthenticated && User.IsInRole("Owner"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Owner
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Index", "OwnerAssets")">Trucks</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Reservations")">Reservations</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Users")">Account</a>
+                            </div>
+                        </li>
+                    }
+                    <!-- End Owner Dropdown -->
+                    <!-- System Adminsitrator Dropdown -->
+                    @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Administration
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Index", "Locations")">Locations</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Events")">Events</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Reservations")">Reservations</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">Owners</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("Index", "RolesAdmin")">Roles</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "OwnerAssets")">Owner Assets</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "ReservationLimits")">Reservation Limits</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "UsersAdmin")">Owners</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Account")">Account</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">Owners</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Manage")">Manage</a>
+                            </div>
+                        </li>
+                    }
+                    <!-- End System Adminsitrator Dropdown -->
                     <li><a href="@Url.Action("Login", "Account")">Login</a></li>
                     <li class="buy-tickets"><a href="#buy-tickets">Event Scheduler</a></li>
                 </ul>
