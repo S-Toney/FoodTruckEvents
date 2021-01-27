@@ -1,36 +1,45 @@
 ﻿@model IEnumerable<IdentitySample.Models.ApplicationUser>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Users";
 }
+<section id="contact" class="section-bg">
 
-<h2>Index</h2>
+    <div class="container" data-aos="fade-up">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
+        <div class="section-header">
+            <h2>@ViewBag.Title</h2>
+            <p class="mx-auto">
+                <a href="@Url.Action("Create", "UsersAdmin")"><i class="fas fa-plus-square fa-2x pl-03"></i></a>
+            </p>
+        </div>
+        <div class="row">
+            <table class="table">
+                <tr>
+                    <th>
+                        User Name
+                    </th>
+                    <th>
 
-        </th>
-    </tr>
+                    </th>
+                </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Details", "UsersAdmin", new { id = item.Id })">@Html.DisplayFor(modelItem => item.UserName)</a>
+</td>
+                        <td>
+                            <a href="@Url.Action("Edit", "UsersAdmin", new { id = item.Id })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
+                            <a href="@Url.Action("Delete", "UsersAdmin", new { id = item.Id })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
+                        </td>
+                    </tr>
+                }
 
-</table>
+            </table>
+        </div>
+    </div>
+</section>
+
+

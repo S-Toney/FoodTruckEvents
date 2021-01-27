@@ -10,11 +10,13 @@ using FTE.DATA.EF;
 
 namespace FTE.UI.MVC.Controllers
 {
+
     public class LocationsController : Controller
     {
         private FTEDBEntities db = new FTEDBEntities();
 
         // GET: Locations
+        [Authorize(Roles = "Admin, SysAdmin")]
         public ActionResult Index()
         {
             return View(db.Locations.ToList());
