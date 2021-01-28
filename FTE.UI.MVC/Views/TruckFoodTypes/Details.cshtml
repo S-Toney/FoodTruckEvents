@@ -4,31 +4,33 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<section id="contact" class="section-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <p>@ViewBag.Title</p>
+                <h2>@Model.Cuisine</h2>
+            <p class="text-center">
+                @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                {
+                    <a href="@Url.Action("Edit", "TruckFoodTypes", new { id = Model.TruckFoodTypeID })" class="mx-2"><i class="fas fa-pen-square fa-2x pl-03"></i></a>
+                }
+                <a href="@Url.Action("Index", "TruckFoodTypes")" class="mx-2"><i class="fas fa-caret-square-left fa-2x pl-03"></i></a>
+            </p>
+        </div>
+        <div class="row contact-info">
 
-<div>
-    <h4>TruckFoodType</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Cuisine)
-        </dt>
+            <div class="col-md-4">
 
-        <dd>
-            @Html.DisplayFor(model => model.Cuisine)
-        </dd>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <div class="col-md-4 text-md text-left">
+               @Model.Description
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <div class="col-md-4">
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TruckFoodTypeID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            </div>
+
+        </div>
+    </div>
+</section>

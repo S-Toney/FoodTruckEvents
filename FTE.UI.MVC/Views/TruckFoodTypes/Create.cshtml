@@ -1,43 +1,45 @@
 ﻿@model FTE.DATA.EF.TruckFoodType
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add a Cuisine Category";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>TruckFoodType</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cuisine, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cuisine, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Cuisine, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+    <section id="contact" class="section-bg">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>@ViewBag.Title</h2>
+                <p class="mx-auto">
+                    <a href="@Url.Action("Index", "TruckFoodTypes")"><i class="fas fa-caret-square-left fa-2x pl-03"></i></a>
+                </p>
             </div>
-        </div>
+            <p class="mx-auto">
+                @Html.ValidationSummary("", new { @class = "text-error text-center" })
+            </p>
+            <div class="row contact-info">
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4 justify-content-center align-items-center">
+                    <div class="align-items-center">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Cuisine, new { htmlAttributes = new { @class = "form-control", placeholder = "Cuisine" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Add Cuisine" class="btn btn-default" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

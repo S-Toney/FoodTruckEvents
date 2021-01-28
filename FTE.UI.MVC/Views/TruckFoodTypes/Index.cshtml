@@ -20,20 +20,18 @@
         </div>
         <div class="row mx-auto">
             <table class="table">
-                <tr>
+                @*<tr>
                     <th>
                         Cuisine
                     </th>
-                    <th>
-                        Description
-                    </th>
+
                     @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
                     {
                         <th>
 
                         </th>
                     }
-                </tr>
+                </tr>*@
 
                 @foreach (var item in Model)
                 {
@@ -41,9 +39,7 @@
                     <td>
                         <a href="@Url.Action("Details", "TruckFoodTypes", new { id=item.TruckFoodTypeID })">@Html.DisplayFor(modelItem => item.Cuisine)</a>
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
+
                     @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
                     {
                         <td>
@@ -58,36 +54,3 @@
         </div>
     </div>
 </section>
-@*<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuisine)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cuisine)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TruckFoodTypeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TruckFoodTypeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TruckFoodTypeID })
-        </td>
-    </tr>
-}
-
-</table>*@
