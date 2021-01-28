@@ -41,4 +41,65 @@
 
 /*h2 {
     overflow-wrap: break-word;
-}*/
+} This code was replaced with C# substrings in the necessary views.*/
+
+/* Mobile Nav Styling */
+/*#mobile-nav {
+    position: fixed;
+    top: 0;
+    padding-top: 18px;
+    bottom: 0;
+    z-index: 998;
+    background: rgba(6, 12, 34, 0.9);
+    left: -260px;
+    width: 260px;
+    overflow-y: auto;
+    transition: 0.4s;
+}
+
+    #mobile-nav ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+        #mobile-nav ul li {
+            position: relative;
+        }
+
+            #mobile-nav ul li a {
+                color: #fff;
+                font-size: 17px;
+                overflow: hidden;
+                padding: 10px 22px 10px 15px;
+                position: relative;
+                text-decoration: none;
+                width: 100%;
+                display: block;
+                outline: none;
+            }
+
+                #mobile-nav ul li a:hover {
+                    color: #f82249;
+                }
+
+            #mobile-nav ul li li {
+                padding-left: 30px;
+            }
+
+        #mobile-nav ul .menu-has-children i {
+            position: absolute;
+            right: 0;
+            z-index: 99;
+            padding: 15px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+            #mobile-nav ul .menu-has-children i.fa-chevron-up {
+                color: #f82249;
+            }
+
+        #mobile-nav ul .menu-item-active {
+            color: #f82249;
+        }*/

@@ -74,6 +74,7 @@
                         <li><a href="#hotels">Hotels</a></li>
                         <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#supporters">Sponsors</a></li>*@
+
                     <!-- Admininstration Dropdown -->
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
@@ -94,6 +95,7 @@
                         </li>
                     }
                     <!-- End Admininstration Dropdown -->
+
                     <!-- Employee Dropdown -->
                     @if (Request.IsAuthenticated && User.IsInRole("Employee"))
                     {
@@ -109,6 +111,7 @@
                         </li>
                     }
                     <!-- End Employee Dropdown -->
+
                     <!-- Owner Dropdown -->
                     @if (Request.IsAuthenticated && User.IsInRole("Owner"))
                     {
@@ -124,12 +127,13 @@
                         </li>
                     }
                     <!-- End Owner Dropdown -->
+
                     <!-- System Adminsitrator Dropdown -->
                     @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
                     {
-                        <li class="nav-item dropdown">
+                        <li class="dropdown d-block">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                System Administrator
+                                System Admin
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="@Url.Action("Index", "Locations")">Locations</a>
@@ -148,7 +152,7 @@
                         </li>
                     }
                     <!-- End System Adminsitrator Dropdown -->
-                    <li><a class="dropdown-item" href="@Url.Action("Index", "RolesAdmin")">Roles Admin</a></li>
+                    <li><a href="@Url.Action("Index", "RolesAdmin")">Roles Admin</a></li>
                     <li><a href="@Url.Action("Login", "Account")">Login</a></li>
                     <li class="buy-tickets"><a href="#buy-tickets">Event Scheduler</a></li>
                 </ul>
