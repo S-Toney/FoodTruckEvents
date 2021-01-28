@@ -1,0 +1,83 @@
+﻿@model FTE.DATA.EF.UserDetails
+
+@{
+    ViewBag.Title = "Add a New User";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <section id="contact" class="section-bg">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>@ViewBag.Title</h2>
+                <p class="mx-auto">
+                    <a href="@Url.Action("Index", "UsersAdmin")"><i class="fas fa-caret-square-left fa-2x pl-03"></i></a>
+                </p>
+            </div>
+            <p class="mx-auto">
+                @Html.ValidationSummary("", new { @class = "text-error text-center" })
+            </p>
+            <div class="row contact-info">
+
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4 justify-content-center align-items-center">
+                    <div class="align-items-center">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Add User" class="btn btn-default" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*<div class="form-horizontal">
+        <h4>UserDetails</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>*@
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

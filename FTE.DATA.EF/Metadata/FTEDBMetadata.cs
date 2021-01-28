@@ -25,7 +25,7 @@ namespace FTE.DATA.EF//.Metadata
             public System.DateTime EventDate { get; set; }
             [Display(Name = "Event is Cancelled")]
             public bool IsCancelled { get; set; }
-            [UIHint("MiltilineText")]
+            [UIHint("MultilineText")]
             [DisplayFormat(NullDisplayText="none")]
             [StringLength(300, ErrorMessage = "* Notes must be 300 characters or less")]
             public string Notes { get; set; }
@@ -68,6 +68,7 @@ namespace FTE.DATA.EF//.Metadata
             [Display(Name = "Truck Name")]
             [StringLength(50, ErrorMessage = "* Truck Name must be 50 characters or less")]
             public string TruckName { get; set; }
+            [UIHint("_DropDownList")]
             [Required(ErrorMessage = "* Truck Food Type is required")]
             [Display(Name ="Food Truck Type")]
             public int TruckFoodTypeID { get; set; }
@@ -78,7 +79,7 @@ namespace FTE.DATA.EF//.Metadata
             [Display(Name ="Owner ID")]
             [StringLength(128, ErrorMessage = "* Owner ID must be 128 characters or less")]
             public string OwnerID { get; set; }
-            [UIHint("MiltilineText")]
+            [UIHint("MultilineText")]
             [DisplayFormat(NullDisplayText = "none")]
             [StringLength(100, ErrorMessage = "* Specialty Notes must be 300 characters or less")]
             [Display(Name ="Specialty Notes")]
@@ -117,7 +118,7 @@ namespace FTE.DATA.EF//.Metadata
         {
             [Required(ErrorMessage ="Cusine Type is Required")]
             public string Cuisine { get; set; }
-            [UIHint("MiltilineText")]
+            [UIHint("MultilineText")]
             [DisplayFormat(NullDisplayText = "none")]
             [StringLength(250, ErrorMessage = "* Description must be 250 characters or less")]
             [Display(Name = "Specialty Notes")]
