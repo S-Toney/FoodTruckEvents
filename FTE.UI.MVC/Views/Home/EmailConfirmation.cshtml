@@ -1,0 +1,34 @@
+﻿@model FTE.UI.MVC.Models.ContactViewModel
+@{
+    ViewBag.Title = "Email Confirmation";
+}
+
+<section id="contact" class="section-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <h2>@ViewBag.Title</h2>
+            <p>Thank you for your message! We will respond at our earliest convenience.</p>
+        </div>
+        <div class="row contact-info">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+                <p class="mb-4">Details of your message are as follows:</p>
+                <p class="text-left">
+                    <strong>Name:</strong> @Model.Name
+                    <br /><br />
+                    <strong>Email:</strong> @Model.Email
+                    <br /><br />
+                    <strong>Subject:</strong> @Model.Subject
+                    <br /><br />
+                    <strong>Message:</strong> @Model.Message
+                </p>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+    </div>
+</section>
+
