@@ -1,0 +1,118 @@
+﻿@model FTE.DATA.EF.OwnerAsset
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<section id="contact" class="section-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <p>@ViewBag.Title</p>
+            <h2>@Model.TruckName</h2>
+            <p class="text-center">
+                <a href="@Url.Action("Edit", "OwnerAssets", new { id = Model.OwnerAssetID })" class="mx-2"><i class="fas fa-pen-square fa-2x pl-03"></i></a>
+                <a href="@Url.Action("Index", "OwnerAssets")" class="mx-2"><i class="fas fa-caret-square-left fa-2x"></i></a>
+            </p>
+        </div>
+        <div class="row contact-info">
+
+            <div class="col-md-4">
+                @Html.DisplayFor(model => model.TruckPhoto)
+            </div>
+
+            <div class="col-md-4 text-left">
+                <p class="text-md my-2">
+                    Cuisine: 
+                    @Html.DisplayFor(model => model.TruckFoodType.Cuisine)
+                </p>
+                <p>
+                    @Html.DisplayFor(model => model.IsActive)
+                    Active
+                </p>
+                <p>
+                    <strong>Owner:</strong>
+                    @Html.DisplayFor(model => model.UserDetail.FirstName) @Html.DisplayFor(model => model.UserDetail.LastName)
+                </p>
+                <p>
+                    <strong>Date Registered:</strong>
+                    @Html.DisplayFor(model => model.DateAdded)
+                </p>
+            </div>
+
+            <div class="col-md-4 text-left">
+                <strong> Notes:</strong> <br />
+                @Html.DisplayFor(model => model.SpecialNotes)
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<h2>Details</h2>
+
+<div>
+    <h4>OwnerAsset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TruckName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TruckName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TruckPhoto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TruckPhoto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecialNotes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecialNotes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAdded)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TruckFoodType.Cuisine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TruckFoodType.Cuisine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserDetail.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OwnerAssetID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

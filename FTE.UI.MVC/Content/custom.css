@@ -53,3 +53,8 @@ a.dropdown-item {
 #mobile-nav ul a.dropdown-item {
     color: #0E1B4D;
 }
+
+.table tr th {
+    vertical-align: central;
+    
+}
