@@ -1,4 +1,5 @@
-﻿using FTE.UI.MVC.Models;
+﻿using FTE.DATA.EF;
+using FTE.UI.MVC.Models;
 using IdentitySample.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -154,6 +155,17 @@ namespace IdentitySample.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    #region Custom User Details
+                    UserDetails newUserDetails = new UserDetails();
+                    newUserDetails.UserID = user.Id;
+                    newUserDetails.FirstName = model.FirstName;
+                    newUserDetails.LastName = model.LastName;
+
+                    FTEDBEntities db = new FTEDBEntities();
+                    db.UserDetails1.Add(newUserDetails);
+                    db.SaveChanges();
+                    #endregion
                     //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");

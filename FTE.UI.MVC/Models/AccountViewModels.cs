@@ -79,6 +79,19 @@ namespace IdentitySample.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "* Last Name must be no more than 50 characters long.")]
+        [DataType(DataType.Password)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "* Last Name must be no more than 50 characters long.")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
     }
 
     public class ResetPasswordViewModel

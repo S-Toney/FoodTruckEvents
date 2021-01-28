@@ -10,6 +10,7 @@ using FTE.DATA.EF;
 
 namespace FTE.UI.MVC.Controllers
 {
+    [Authorize(Roles = "SysAdmin, Admin")]
     public class TruckFoodTypesController : Controller
     {
         private FTEDBEntities db = new FTEDBEntities();
