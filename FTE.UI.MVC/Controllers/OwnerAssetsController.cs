@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FTE.DATA.EF;
+using FTE.UI.MVC.Utilities;
 
 namespace FTE.UI.MVC.Controllers
 {
+    [Authorize(Roles = "SysAdmin, Owner")]
     public class OwnerAssetsController : Controller
     {
         private FTEDBEntities db = new FTEDBEntities();
@@ -49,10 +52,41 @@ namespace FTE.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OwnerAssetID,TruckName,TruckFoodTypeID,TruckPhoto,OwnerID,SpecialNotes,IsActive,DateAdded")] OwnerAsset ownerAsset)
+        public ActionResult Create([Bind(Include = "OwnerAssetID,TruckName,TruckFoodTypeID,TruckPhoto,OwnerID,SpecialNotes,IsActive,DateAdded")] OwnerAsset ownerAsset, HttpPostedFileBase truckImg)
         {
+            if (ownerAsset != null)
+            {
+                ownerAsset.DateAdded = DateTime.UtcNow;
+            }
             if (ModelState.IsValid)
             {
+                #region Image Upload
+                string file = "NoImage.png";
+
+                if (truckImg != null)
+                {
+                    file = truckImg.FileName;
+                    string ext = file.Substring(file.LastIndexOf('.'));
+                    string[] goodExts = { ".jpeg", ".jpg", ".png", ".gif" };
+
+                    if (goodExts.Contains(ext))
+                    {
+                        if (truckImg.ContentLength <= 4194304)
+                        {
+                            file = Guid.NewGuid() + ext;
+
+                            #region Resize Image
+                            string savePath = Server.MapPath("~/Content/images/");
+                            Image convertedImage = Image.FromStream(truckImg.InputStream);
+                            int maxImageSize = 500;
+                            int maxThumbSize = 100;
+                            ImageService.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
+                            #endregion
+                        }
+                        ownerAsset.TruckPhoto = file;
+                    }
+                }
+                #endregion
                 db.OwnerAssets.Add(ownerAsset);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -85,10 +119,44 @@ namespace FTE.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OwnerAssetID,TruckName,TruckFoodTypeID,TruckPhoto,OwnerID,SpecialNotes,IsActive,DateAdded")] OwnerAsset ownerAsset)
+        public ActionResult Edit([Bind(Include = "OwnerAssetID,TruckName,TruckFoodTypeID,TruckPhoto,OwnerID,SpecialNotes,IsActive,DateAdded")] OwnerAsset ownerAsset, HttpPostedFileBase truckImg)
         {
             if (ModelState.IsValid)
             {
+                #region File Upload
+                //TODONE File Upload
+                //string file = "NoImage.png";
+                if (truckImg != null)
+                {
+                    string file = truckImg.FileName;
+                    string ext = file.Substring(file.LastIndexOf('.'));
+                    string[] goodExts = { ".jpeg", ".jpg", ".png", ".gif" };
+                    if (goodExts.Contains(ext))
+                    {
+                        if (truckImg.ContentLength <= 4194304)
+                        {
+                            file = Guid.NewGuid() + ext;
+
+                            #region Resize Image
+                            string savePath = Server.MapPath("~/Content/images/");
+                            Image convertedImage = Image.FromStream(truckImg.InputStream);
+
+                            int maxImageSize = 500;
+                            int maxThumbSize = 100;
+
+                            ImageService.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
+                            #endregion
+
+                            if (ownerAsset.TruckPhoto != null && ownerAsset.TruckPhoto != "NoImage.png")
+                            {
+                                string path = Server.MapPath("~/Content/images/");
+                                ImageService.Delete(path, ownerAsset.TruckPhoto);
+                            }
+                        }
+                        ownerAsset.TruckPhoto = file;
+                    }
+                }
+                #endregion
                 db.Entry(ownerAsset).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

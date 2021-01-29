@@ -58,3 +58,8 @@ a.dropdown-item {
     vertical-align: central;
     
 }
+
+textarea.form-control {
+    resize: none;
+    height: 7em;
+}

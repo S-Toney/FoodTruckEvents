@@ -17,7 +17,10 @@
         <div class="row contact-info">
 
             <div class="col-md-4">
-                @Html.DisplayFor(model => model.TruckPhoto)
+                <!-- Truck Image -->
+                <div class="col-md-6 mb-4">
+                    <img src="~/Content/images/@Model.TruckPhoto" alt="@Model.TruckName" title="@Model.TruckPhoto" class="img-fluid" />
+                </div>
             </div>
 
             <div class="col-md-4 text-left">
@@ -40,7 +43,7 @@
             </div>
 
             <div class="col-md-4 text-left">
-                <strong> Notes:</strong> <br />
+                <strong> @Html.DisplayNameFor(model => model.SpecialNotes)</strong> <br />
                 @Html.DisplayFor(model => model.SpecialNotes)
             </div>
 
@@ -48,7 +51,7 @@
     </div>
 </section>
 
-<h2>Details</h2>
+@*<h2>Details</h2>
 
 <div>
     <h4>OwnerAsset</h4>
@@ -115,4 +118,4 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.OwnerAssetID }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@

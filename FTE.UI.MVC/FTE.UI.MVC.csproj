@@ -198,6 +198,8 @@
     <Content Include="Content\images\favicon-32x32.png" />
     <Content Include="Content\images\favicon.ico" />
     <Content Include="Content\images\ferrisWheelNight.jpg" />
+    <Content Include="Content\images\NoImage.png" />
+    <Content Include="Content\images\t_NoImage.png" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\vendor\aos\aos.css" />
     <Content Include="Content\vendor\aos\aos.js" />
