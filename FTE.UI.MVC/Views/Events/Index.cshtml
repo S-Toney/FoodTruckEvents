@@ -51,7 +51,10 @@
                             @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Employee"))
                             {
                                 <a href="@Url.Action("Edit", "Events", new { id = item.EventID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
-                                @*<a href="@Url.Action("Delete", "Events", new { id=item.EventID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>*@
+                            }
+                            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                            { 
+                                <a href="@Url.Action("Delete", "Events", new { id=item.EventID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
                             }
                         </td>
                     </tr>

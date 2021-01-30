@@ -1,0 +1,89 @@
+﻿@model FTE.DATA.EF.Reservation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<section id="contact" class="section-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <p>@ViewBag.Title</p>
+            <h2>Reservation</h2>
+
+            <p class="text-center">
+                @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Owner"))
+                {
+                    <a href="@Url.Action("Edit", "Reservations", new {  id = Model.ReservationID })" class="mx-2"><i class="fas fa-pen-square fa-2x pl-03"></i></a>
+                }
+                <a href="@Url.Action("Index", "Reservations")" class="mx-2"><i class="fas fa-caret-square-left fa-2x pl-03"></i></a>
+            </p>
+        </div>
+        <div class="row" @*contact-info*@>
+
+            <div class="col-md-4">
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="pl-045">
+                    <div>
+                        <strong>@Html.DisplayNameFor(model => model.ReservationDate):</strong>
+                        @Html.DisplayFor(model => model.ReservationDate)
+                    </div>
+                    <div>
+                        <strong>@Html.DisplayNameFor(model => model.Event.EventName):</strong>
+                        @Html.DisplayFor(model => model.Event.EventName)
+
+                    </div>
+                    <div>
+                        <strong>@Html.DisplayNameFor(model => model.OwnerAsset.TruckName):</strong>
+                        @Html.DisplayFor(model => model.OwnerAsset.TruckName)
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@*<h2>Details</h2>
+
+<div>
+    <h4>Reservation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ReservationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReservationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.EventName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.EventName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerAsset.TruckName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerAsset.TruckName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReservationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
