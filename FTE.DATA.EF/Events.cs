@@ -12,10 +12,10 @@ namespace FTE.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Event
+    public partial class Events
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Event()
+        public Events()
         {
             this.Reservations = new HashSet<Reservation>();
         }

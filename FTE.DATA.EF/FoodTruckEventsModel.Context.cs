@@ -25,7 +25,7 @@ namespace FTE.DATA.EF
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Events> Events1 { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<OwnerAsset> OwnerAssets { get; set; }
         public virtual DbSet<Reservation> Reservations { get; set; }

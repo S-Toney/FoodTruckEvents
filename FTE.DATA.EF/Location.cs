@@ -17,7 +17,7 @@ namespace FTE.DATA.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Location()
         {
-            this.Events = new HashSet<Event>();
+            this.Events = new HashSet<Events>();
         }
     
         public int LocationID { get; set; }
@@ -28,6 +28,6 @@ namespace FTE.DATA.EF
         public byte ReservationLimit { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Events> Events { get; set; }
     }
 }

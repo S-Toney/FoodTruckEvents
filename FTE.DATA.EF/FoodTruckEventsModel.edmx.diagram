@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ab94f66666bc489b8d624bc281d3e6c2" Name="Diagram1">
-        <EntityTypeShape EntityType="FTEDBModel.Event" Width="1.5" PointX="7.375" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FTEDBModel.Events" Width="1.5" PointX="7.375" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FTEDBModel.Location" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FTEDBModel.OwnerAsset" Width="1.5" PointX="3.125" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FTEDBModel.Reservation" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />

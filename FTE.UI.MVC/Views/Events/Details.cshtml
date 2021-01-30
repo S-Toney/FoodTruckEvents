@@ -1,0 +1,105 @@
+﻿@model FTE.DATA.EF.Events
+
+@{
+    ViewBag.Title = "Details";
+}
+<section id="contact" class="section-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <p>@ViewBag.Title</p>
+            <h2>@Model.EventName</h2>
+
+            <p class="text-center">
+                @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                {
+                    <a href="@Url.Action("Edit", "Events", new { id = Model.EventID })" class="mx-2"><i class="fas fa-pen-square fa-2x pl-03"></i></a>
+                }
+                <a href="@Url.Action("Index", "Events")" class="mx-2"><i class="fas fa-caret-square-left fa-2x pl-03"></i></a>
+            </p>
+        </div>
+        <div class="row" @*contact-info*@>
+
+            <div class="col-md-4">
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="pl-045">
+                    <div>
+                        @Html.DisplayNameFor(model => model.EventDate):
+                        @Html.DisplayFor(model => model.EventDate)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(model => model.IsCancelled)
+                        @Html.DisplayNameFor(model => model.IsCancelled)
+                    </div>
+                    <div>
+                        @Html.DisplayNameFor(model => model.Location.LocationName):<br />
+                        @Html.DisplayFor(model => model.Location.LocationName)
+                    </div>
+                    <div>
+                        @Html.DisplayNameFor(model => model.Notes):<br />
+                        @Html.DisplayFor(model => model.Notes)
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
+
+        </div>
+    </div>
+</section>
+@*<h2>Details</h2>
+
+<div>
+    <h4>Events</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EventName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCancelled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCancelled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location.LocationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.LocationName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EventID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

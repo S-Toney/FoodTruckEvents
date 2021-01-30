@@ -19,7 +19,7 @@ namespace FTE.DATA.EF
         public int EventID { get; set; }
         public System.DateTime ReservationDate { get; set; }
     
-        public virtual Event Event { get; set; }
+        public virtual Events Event { get; set; }
         public virtual OwnerAsset OwnerAsset { get; set; }
     }
 }

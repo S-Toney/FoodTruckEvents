@@ -157,7 +157,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FTEDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Event">
+        <EntityType Name="Events">
           <Key>
             <PropertyRef Name="EventID" />
           </Key>
@@ -229,7 +229,7 @@
         </EntityType>
         <Association Name="FK_Events_Locations">
           <End Role="Locations" Type="Self.Location" Multiplicity="1" />
-          <End Role="Events" Type="Self.Event" Multiplicity="*" />
+          <End Role="Events" Type="FTEDBModel.Events" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Locations">
               <PropertyRef Name="LocationID" />
@@ -240,7 +240,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Reservations_Events">
-          <End Role="Events" Type="Self.Event" Multiplicity="1" />
+          <End Role="Events" Type="FTEDBModel.Events" Multiplicity="1" />
           <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Events">
@@ -288,7 +288,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FTEDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="Events1" EntityType="FTEDBModel.Events" />
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="OwnerAssets" EntityType="Self.OwnerAsset" />
           <EntitySet Name="Reservations" EntityType="Self.Reservation" />
@@ -296,10 +296,10 @@
           <EntitySet Name="UserDetails1" EntityType="FTEDBModel.UserDetails" />
           <AssociationSet Name="FK_Events_Locations" Association="Self.FK_Events_Locations">
             <End Role="Locations" EntitySet="Locations" />
-            <End Role="Events" EntitySet="Events" />
+            <End Role="Events" EntitySet="Events1" />
           </AssociationSet>
           <AssociationSet Name="FK_Reservations_Events" Association="Self.FK_Reservations_Events">
-            <End Role="Events" EntitySet="Events" />
+            <End Role="Events" EntitySet="Events1" />
             <End Role="Reservations" EntitySet="Reservations" />
           </AssociationSet>
           <AssociationSet Name="FK_OwnerAssets_TruckFoodType" Association="Self.FK_OwnerAssets_TruckFoodType">
@@ -321,8 +321,8 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FTEDBModelStoreContainer" CdmEntityContainer="FTEDBEntities">
-          <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="FTEDBModel.Event">
+          <EntitySetMapping Name="Events1">
+            <EntityTypeMapping TypeName="FTEDBModel.Events">
               <MappingFragment StoreEntitySet="Events">
                 <ScalarProperty Name="EventID" ColumnName="EventID" />
                 <ScalarProperty Name="EventName" ColumnName="EventName" />

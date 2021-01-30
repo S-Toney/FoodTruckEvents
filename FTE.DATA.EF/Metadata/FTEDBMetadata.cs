@@ -21,11 +21,11 @@ namespace FTE.DATA.EF//.Metadata
         public int LocationID { get; set; }
 
         [Required(ErrorMessage = "* Event Date is required")]
-        [Display(Name = "Event Date")]
+        [Display(Name = "Date")]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public System.DateTime EventDate { get; set; }
 
-        [Display(Name = "Event is Cancelled")]
+        [Display(Name = "Cancelled")]
         public bool IsCancelled { get; set; }
 
         [UIHint("MultilineText")]

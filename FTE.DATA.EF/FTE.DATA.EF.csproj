@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Event.cs">
+    <Compile Include="Events.cs">
       <DependentUpon>FoodTruckEventsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FoodTruckEventsModel.Context.cs">
