@@ -24,9 +24,9 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(model => model.TruckPhoto, htmlAttributes: new { @class = "control-label col-md-2" })
-                            @*@Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })*@
-                            <input type="file" name="truckImg" />
-                            @Html.ValidationMessageFor(model => model.TruckPhoto, "", new { @class = "text-danger" })
+                        @*@Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="file" name="truckImg" />
+                        @Html.ValidationMessageFor(model => model.TruckPhoto, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <!-- Truck Details -->
@@ -46,12 +46,14 @@
                         @Html.DropDownList("TruckFoodTypeID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.TruckFoodTypeID, "", new { @class = "text-danger" })
                     </div>
+                    @if(User.IsInRole("SysAdmin") || User.IsInRole("Admin"))
+                    {
                     <div class="form-group">
                         @Html.LabelFor(model => model.OwnerID, "Owner", htmlAttributes: new { @class = "control-label" })
                         @Html.DropDownList("OwnerID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.OwnerID, "", new { @class = "text-danger" })
                     </div>
-
+                    }
                 </div>
                 <!-- Truck Notes -->
                 <div class="col-md-4 text-left">

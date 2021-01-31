@@ -25,19 +25,19 @@
 
             <div class="col-md-4 text-left">
                 <p class="text-md my-2">
-                    Cuisine: 
+                    @Html.DisplayNameFor(model => model.TruckFoodType.Cuisine):
                     @Html.DisplayFor(model => model.TruckFoodType.Cuisine)
                 </p>
                 <p>
                     @Html.DisplayFor(model => model.IsActive)
-                    Active
+                    @Html.DisplayNameFor(model => model.IsActive)
                 </p>
                 <p>
-                    <strong>Owner:</strong>
+                    <strong>@Html.DisplayNameFor(model => model.OwnerID):</strong>
                     @Html.DisplayFor(model => model.UserDetail.FirstName) @Html.DisplayFor(model => model.UserDetail.LastName)
                 </p>
                 <p>
-                    <strong>Date Registered:</strong>
+                    <strong>@Html.DisplayNameFor(model => model.DateAdded):</strong>
                     @Html.DisplayFor(model => model.DateAdded)
                 </p>
             </div>

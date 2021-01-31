@@ -9,18 +9,69 @@ using System.Web;
 using System.Web.Mvc;
 using FTE.DATA.EF;
 using FTE.UI.MVC.Utilities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using FTE.UI.MVC.Models;
+
 
 namespace FTE.UI.MVC.Controllers
 {
     [Authorize(Roles = "SysAdmin, Owner")]
     public class OwnerAssetsController : Controller
     {
+       
         private FTEDBEntities db = new FTEDBEntities();
+        //Getting Roles & Users
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            set
+            {
+                _userManager = value;
+            }
+        }
+
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+        //var currentUser = UserManager.GetUserAsync(HttpContext.User).Result;
+
 
         // GET: OwnerAssets
         public ActionResult Index()
         {
+            //var user = _context.Users.FirstOrDefault(x => x.Username == login.Username);
+
+            //System.Web.HttpContext.Current.User.Identity.Name
+
+            //var test = db.OwnerAssets.FirstOrDefault(x => x.OwnerID == System.Web.HttpContext.Current.User.Identity.Name);
+            //var again = db.Reservations.Where(x => x.OwnerAssetID == test.OwnerAssetID);
+            //return View(again.ToList());
+
+            var userName = User.Identity.GetUserId();
+            var assets = db.OwnerAssets.Include(o => o.TruckFoodType).Include(o => o.UserDetail).Where(u => u.UserDetail.UserID == userName).ToList();
+
             var ownerAssets = db.OwnerAssets.Include(o => o.TruckFoodType).Include(o => o.UserDetail);
+            if (User.IsInRole("Owner"))
+            {
+                //var ownerAssets = db.OwnerAssets.Include(o => o.TruckFoodType).Include(o => o.UserDetail).Where(o => o.OwnerID == id);
+                return View(assets);
+
+            }
+
             return View(ownerAssets.ToList());
         }
 
@@ -42,8 +93,10 @@ namespace FTE.UI.MVC.Controllers
         // GET: OwnerAssets/Create
         public ActionResult Create()
         {
+            //var owner = from o in db.OwnerAssets
+                        //where o.OwnerID == User.Identity.
             ViewBag.TruckFoodTypeID = new SelectList(db.TruckFoodTypes, "TruckFoodTypeID", "Cuisine");
-            ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FirstName");
+            ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FullName");
             return View();
         }
 
@@ -54,10 +107,17 @@ namespace FTE.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OwnerAssetID,TruckName,TruckFoodTypeID,TruckPhoto,OwnerID,SpecialNotes,IsActive,DateAdded")] OwnerAsset ownerAsset, HttpPostedFileBase truckImg)
         {
-            if (ownerAsset != null)
+            var userName = User.Identity.GetUserId();
+            var owners = RoleManager.FindByName("Owner");
+            var trucks = new List<OwnerAsset>();
+            //Autoassign the date the truck is added
+            ownerAsset.DateAdded = DateTime.UtcNow;
+            //Autoassign the owner that is logged in
+            if (User.IsInRole("Owner"))
             {
-                ownerAsset.DateAdded = DateTime.UtcNow;
+                ownerAsset.OwnerID = userName;
             }
+            
             if (ModelState.IsValid)
             {
                 #region Image Upload
@@ -93,7 +153,8 @@ namespace FTE.UI.MVC.Controllers
             }
 
             ViewBag.TruckFoodTypeID = new SelectList(db.TruckFoodTypes, "TruckFoodTypeID", "Cuisine", ownerAsset.TruckFoodTypeID);
-            ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FirstName", ownerAsset.OwnerID);
+            
+            ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FullName", ownerAsset.OwnerID);
             return View(ownerAsset);
         }
 
@@ -110,7 +171,7 @@ namespace FTE.UI.MVC.Controllers
                 return HttpNotFound();
             }
             ViewBag.TruckFoodTypeID = new SelectList(db.TruckFoodTypes, "TruckFoodTypeID", "Cuisine", ownerAsset.TruckFoodTypeID);
-            ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FirstName", ownerAsset.OwnerID);
+            ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FullName", ownerAsset.OwnerID);
             return View(ownerAsset);
         }
 
@@ -162,7 +223,7 @@ namespace FTE.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TruckFoodTypeID = new SelectList(db.TruckFoodTypes, "TruckFoodTypeID", "Cuisine", ownerAsset.TruckFoodTypeID);
-            ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FirstName", ownerAsset.OwnerID);
+            ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FullName", ownerAsset.OwnerID);
             return View(ownerAsset);
         }
 

@@ -52,6 +52,28 @@ namespace FTE.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ReservationID,OwnerAssetID,EventID,ReservationDate")] Reservation reservation)
         {
+            //var limit = from l in db.Locations
+            //            select l.ReservationLimit;
+            //var resdate = from r in db.Reservations
+            //              select r.ReservationDate;
+            //int count = 0;
+            //foreach (Reservation r in db.Reservations)
+            //{
+            //    count++;
+            //}
+ 
+            //Code below enforces reservation limit set in db
+            //if (User.IsInRole("Owner") || User.IsInRole("Employee") && count > limit)
+            //{
+            //    ViewBag.errorMessage = $"This Truck limit for {reservation.Event.Location} has been reached on {reservation.ReservationDate}";
+            //}
+
+            // Code below prevents duplicate reservations
+            //if (truckid == )
+            //{
+            //    ViewBag.errorMessage = $"{OwnerAssetID} already has a reservation at {EventName}."
+            //}
+
             if (ModelState.IsValid)
             {
                 db.Reservations.Add(reservation);
