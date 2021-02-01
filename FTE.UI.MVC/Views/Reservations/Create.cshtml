@@ -23,6 +23,8 @@
 
                 </div>
                 <div class="col-md-4 text-left">
+                    <p class="delete-warning mb-1 p-1">@ViewBag.ErrorMessageDup</p>
+                    <p class="delete-warning mb-1 p-1">@ViewBag.ErrorMessageLimit</p>
                     <div class="form-group">
                         @Html.LabelFor(model => model.OwnerAssetID, "OwnerAssetID", htmlAttributes: new { @class = "control-label" })
                             @Html.DropDownList("OwnerAssetID", null, htmlAttributes: new { @class = "form-control" })

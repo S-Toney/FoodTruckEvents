@@ -19,7 +19,7 @@ namespace FTE.UI.MVC.Controllers
     [Authorize(Roles = "SysAdmin, Owner")]
     public class OwnerAssetsController : Controller
     {
-       
+
         private FTEDBEntities db = new FTEDBEntities();
         //Getting Roles & Users
         private ApplicationUserManager _userManager;
@@ -53,14 +53,6 @@ namespace FTE.UI.MVC.Controllers
         // GET: OwnerAssets
         public ActionResult Index()
         {
-            //var user = _context.Users.FirstOrDefault(x => x.Username == login.Username);
-
-            //System.Web.HttpContext.Current.User.Identity.Name
-
-            //var test = db.OwnerAssets.FirstOrDefault(x => x.OwnerID == System.Web.HttpContext.Current.User.Identity.Name);
-            //var again = db.Reservations.Where(x => x.OwnerAssetID == test.OwnerAssetID);
-            //return View(again.ToList());
-
             var userName = User.Identity.GetUserId();
             var assets = db.OwnerAssets.Include(o => o.TruckFoodType).Include(o => o.UserDetail).Where(u => u.UserDetail.UserID == userName).ToList();
 
@@ -94,7 +86,7 @@ namespace FTE.UI.MVC.Controllers
         public ActionResult Create()
         {
             //var owner = from o in db.OwnerAssets
-                        //where o.OwnerID == User.Identity.
+            //where o.OwnerID == User.Identity.
             ViewBag.TruckFoodTypeID = new SelectList(db.TruckFoodTypes, "TruckFoodTypeID", "Cuisine");
             ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FullName");
             return View();
@@ -117,7 +109,7 @@ namespace FTE.UI.MVC.Controllers
             {
                 ownerAsset.OwnerID = userName;
             }
-            
+
             if (ModelState.IsValid)
             {
                 #region Image Upload
@@ -153,7 +145,7 @@ namespace FTE.UI.MVC.Controllers
             }
 
             ViewBag.TruckFoodTypeID = new SelectList(db.TruckFoodTypes, "TruckFoodTypeID", "Cuisine", ownerAsset.TruckFoodTypeID);
-            
+
             ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FullName", ownerAsset.OwnerID);
             return View(ownerAsset);
         }
