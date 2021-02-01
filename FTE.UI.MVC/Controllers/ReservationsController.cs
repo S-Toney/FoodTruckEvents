@@ -119,6 +119,7 @@ namespace FTE.UI.MVC.Controllers
             var userName = User.Identity.GetUserId();
             if (User.IsInRole("Owner"))
             {
+                ViewBag.EventID = new SelectList(db.Events1, "EventID", "EventName");
                 ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets.Where(x => x.OwnerID == userName), "OwnerAssetID", "TruckName");
                 return View();
             }
@@ -178,7 +179,7 @@ namespace FTE.UI.MVC.Controllers
                         else
                         {
                             // Otherwise, error message that reservation limit for day & location has been reached
-                            ViewBag.ErrorMessageLimit = $"* {reservation.Event.EventName} has reached it's reservation limit for {reservation.ReservationDate:d}.";
+                            ViewBag.ErrorMessageLimit = $"* {ev.EventName} has reached it's reservation limit for {reservation.ReservationDate:d}.";
                         }
                     }
                     else
@@ -201,6 +202,7 @@ namespace FTE.UI.MVC.Controllers
             if (User.IsInRole("Owner"))
             {
                 var userName = User.Identity.GetUserId();
+                ViewBag.EventID = new SelectList(db.Events1, "EventID", "EventName", reservation.EventID);
                 ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets.Where(x => x.OwnerID == userName), "OwnerAssetID", "TruckName");
                 return View();
             }
