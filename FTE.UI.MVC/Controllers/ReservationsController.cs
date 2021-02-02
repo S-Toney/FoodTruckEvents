@@ -46,22 +46,34 @@ namespace FTE.UI.MVC.Controllers
         private FTEDBEntities db = new FTEDBEntities();
 
         // GET: Reservations
-        public ActionResult Index()
+        public ActionResult Index(string selectedLocation = "All")
         {
-            var userName = User.Identity.GetUserId();
-            //var userRes = db.Reservations.Include(r => r.Event).Include(r => r.OwnerAsset).Include(OwnerAssets, d => d.UserDetail).Where(u => u.UserDetail.UserID == userName).ToList();
-            //var assets = db.OwnerAssets.Include(o => o.TruckFoodType).Include(o => o.UserDetail).Where(u => u.UserDetail.UserID == userName).ToList();
-
             //var userRes = (from r in db.Reservations
             //               join ow in db.OwnerAssets on r.OwnerAssetID equals ow.OwnerAssetID
             //               join ud in db.UserDetails1 on ow.OwnerID equals ud.UserID
             //               where ud.UserID == userName 
             //               select new { r.Event, r.OwnerAsset }).ToList;
-
+            var userName = User.Identity.GetUserId();
             var reservations = db.Reservations.Include(r => r.Event).Include(r => r.OwnerAsset);
-            // List<Reservation> userRes = new List<Reservation>();
 
-            if (!User.IsInRole("Admin") && (!User.IsInRole("SysAdmin")))
+            // TODO Search for Reservation
+            //if (!String.IsNullOrEmpty(searching))
+            //{
+            //    var resSearch = from r in db.Reservations.Where(s => s.)
+
+            //}
+
+            var rvm = new ReservationViewModel();
+            rvm.Locations = db.Locations.ToList();
+            var reservationData = db.Reservations;
+            if (!String.IsNullOrEmpty(selectedLocation))
+            {
+                reservationData = db.Reservations.Where(s => s.Event.EventName == selectedLocation);
+            }
+            rvm.ReservationData.ToList();
+            return View(rvm);
+
+            if (User.IsInRole("Owner"))
             {
                 List<Reservation> userRes = new List<Reservation>();
                 List<OwnerAsset> ListOwnerAsset = db.OwnerAssets.Where(x => x.OwnerID == userName).ToList();
@@ -71,28 +83,18 @@ namespace FTE.UI.MVC.Controllers
                 }
                 return View(userRes);
             }
+            if (User.IsInRole("Employee"))
+            {
+
+
+
+
+                return View();
+            }
             else
             {
                 return View(reservations);
             }
-
-
-
-
-
-            //else (user is in role of Owner/customer
-
-            //get a list of the current owner Assets (using the userID above)
-
-            //loop through the reservatations
-
-            //inside ^ loop loop through owner assets
-
-            //if res.OwnerAssetID == ownerAsset.ID then add the reservation to the userRes collection
-
-            //If userRese is Null - send to create
-
-            //Else return the view with (userRes)
 
         }
 
