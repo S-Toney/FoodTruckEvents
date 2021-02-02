@@ -56,6 +56,7 @@ namespace FTE.UI.MVC.Controllers
             var userName = User.Identity.GetUserId();
             var reservations = db.Reservations.Include(r => r.Event).Include(r => r.OwnerAsset);
 
+            #region Further Filtering
             // TODO Search for Reservation
             //if (!String.IsNullOrEmpty(searching))
             //{
@@ -63,15 +64,17 @@ namespace FTE.UI.MVC.Controllers
 
             //}
 
-            var rvm = new ReservationViewModel();
-            rvm.Locations = db.Locations.ToList();
-            var reservationData = db.Reservations;
+            //TODO Add dropdown filtering
+            //var rvm = new ReservationViewModel();
+            //rvm.Locations = db.Locations.ToList();
+            //var reservationData = db.Reservations;
             //if (!String.IsNullOrEmpty(selectedLocation))
             //{
             //    reservationData = db.Reservations.AsQueryable(.Where(s => s.Event.EventName == selectedLocation));
             //}
             //rvm.ReservationData.ToList();
             //return View(rvm);
+            #endregion
 
             if (User.IsInRole("Owner"))
             {
@@ -83,14 +86,10 @@ namespace FTE.UI.MVC.Controllers
                 }
                 return View(userRes);
             }
-            if (User.IsInRole("Employee"))
-            {
-
-
-
-
-                return View();
-            }
+            //if (User.IsInRole("Employee"))
+            //{
+            //    return View();
+            //}
             else
             {
                 return View(reservations);
@@ -121,12 +120,12 @@ namespace FTE.UI.MVC.Controllers
             var userName = User.Identity.GetUserId();
             if (User.IsInRole("Owner"))
             {
-                ViewBag.EventID = new SelectList(db.Events1, "EventID", "EventName");
+                ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes");
                 ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets.Where(x => x.OwnerID == userName), "OwnerAssetID", "TruckName");
                 return View();
             }
 
-            ViewBag.EventID = new SelectList(db.Events1, "EventID", "EventName");
+            ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes");
             ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "TruckName");
             return View();
         }
@@ -174,6 +173,9 @@ namespace FTE.UI.MVC.Controllers
                         //If < limit then add changes and redirect to index
                         if (resNum < limit)
                         {
+                            //get the reservation ddate from the event
+                            reservation.ReservationDate = ev.EventDate;
+
                             db.Reservations.Add(reservation);
                             db.SaveChanges();
                             return RedirectToAction("Index");
@@ -187,6 +189,10 @@ namespace FTE.UI.MVC.Controllers
                     else
                     {
                         //Admin can add reservation regardless of limit
+                        //get the reservation ddate from the event
+                        reservation.ReservationDate = ev.EventDate;
+
+
                         db.Reservations.Add(reservation);
                         db.SaveChanges();
                         return RedirectToAction("Index");
@@ -204,11 +210,11 @@ namespace FTE.UI.MVC.Controllers
             if (User.IsInRole("Owner"))
             {
                 var userName = User.Identity.GetUserId();
-                ViewBag.EventID = new SelectList(db.Events1, "EventID", "EventName", reservation.EventID);
+                ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes", reservation.EventID);
                 ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets.Where(x => x.OwnerID == userName), "OwnerAssetID", "TruckName");
                 return View();
             }
-            ViewBag.EventID = new SelectList(db.Events1, "EventID", "EventName", reservation.EventID);
+            ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes", reservation.EventID);
             ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "TruckName", reservation.OwnerAssetID);
             return View(reservation);
         }
@@ -226,7 +232,7 @@ namespace FTE.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.EventID = new SelectList(db.Events1, "EventID", "EventName", reservation.EventID);
+            ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes", reservation.EventID);
             ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "TruckName", reservation.OwnerAssetID);
             return View(reservation);
         }
@@ -238,13 +244,15 @@ namespace FTE.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ReservationID,OwnerAssetID,EventID,ReservationDate")] Reservation reservation)
         {
+            var ev = db.Events1.Where(e => e.EventID == reservation.EventID).Single();
             if (ModelState.IsValid)
             {
+                reservation.ReservationDate = ev.EventDate;
                 db.Entry(reservation).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.EventID = new SelectList(db.Events1, "EventID", "EventName", reservation.EventID);
+            ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes", reservation.EventID);
             ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "TruckName", reservation.OwnerAssetID);
             return View(reservation);
         }

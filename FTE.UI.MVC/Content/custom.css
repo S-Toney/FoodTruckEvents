@@ -71,10 +71,3 @@ textarea.form-control {
     resize: none;
     height: 7em;
 }
-
-/* To allow dropdown to scroll in mobile nav 
-.scrollable-menu {
-    height: auto;
-    max-height: 200px;
-    overflow-x: hidden;
-}*/

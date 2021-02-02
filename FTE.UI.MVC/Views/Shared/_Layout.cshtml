@@ -93,7 +93,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="@Url.Action("Index", "RolesAdmin")">Roles</a>
                                             @*<a class="dropdown-item" href="@Url.Action("Index", "Employees")">Employees</a>*@
-                                            <a class="dropdown-item" href="@Url.Action("Index", "ReservationLimits")">Reservation Limits</a>
+                                            @*<a class="dropdown-item" href="@Url.Action("Index", "ReservationLimits")">Reservation Limits</a>*@
                                         </div>
                                     </li>
                                 }
@@ -138,18 +138,21 @@
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="@Url.Action("Index", "TruckFoodTypes")">Cuisine Categories</a>
+                                            <a class="dropdown-item" href="@Url.Action("Index", "OwnerAssets")">Trucks</a>
+                                            <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">Owners</a>
                                             <a class="dropdown-item" href="@Url.Action("Index", "Locations")">Locations</a>
                                             <a class="dropdown-item" href="@Url.Action("Index", "Events")">Events</a>
-                                            <a class="dropdown-item" href="@Url.Action("Index", "Reservations")">Reservations</a>
-                                            <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">Owners</a>
+                                            <a class="dropdown-item" href="@Url.Action("Index", "Reservations")">Reservations</a>                                 
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="@Url.Action("Index", "RolesAdmin")">Roles</a>
-                                            <a class="dropdown-item" href="@Url.Action("Index", "OwnerAssets")">Owner Assets</a>
-                                            <a class="dropdown-item" href="@Url.Action("Index", "ReservationLimits")">Reservation Limits</a>
                                             <a class="dropdown-item" href="@Url.Action("Index", "UsersAdmin")">Users Admin</a>
-                                            <a class="dropdown-item" href="@Url.Action("Index", "Account")">Account</a>
                                             <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">User Details</a>
-                                            <a class="dropdown-item" href="@Url.Action("Index", "Manage")">Manage</a>
+                                            <a class="dropdown-item" href="@Url.Action("Index", "Account")">Account</a>
+                                            @*<a class="dropdown-item" href="@Url.Action("Index", "ReservationLimits")">Reservation Limits</a>*@
+                                            
+                                            
+                                            
+                                            @*<a class="dropdown-item" href="@Url.Action("Index", "Manage")">Manage</a>*@
                                         </div>
                                     </li>
                                 }

@@ -35,7 +35,13 @@ namespace FTE.DATA.EF//.Metadata
     }
 
     [MetadataType(typeof(EventsMetadata))]
-    public partial class Events { }
+    public partial class Events {
+        public string SelectRes
+        {
+            [Display(Name = "Select Reservation")]
+            get { return $"{EventName} : {EventDate:d}"; }
+        }
+    }
     #endregion
 
     #region Location Metadata
@@ -127,7 +133,9 @@ namespace FTE.DATA.EF//.Metadata
     }
 
     [MetadataType(typeof(ReservationMetadata))]
-    public partial class Reservation { }
+    public partial class Reservation
+    {
+    }
     #endregion
 
     #region Truck Food Types

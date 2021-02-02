@@ -19,87 +19,89 @@
             }
         </div>
         @using (Html.BeginForm("Index", "Reservations"))
-        <div class="row mx-auto">
-            <table class="table">
-                <tr class="text-center">
-                    <th>
-                        @Html.DisplayNameFor(model => model.Event.EventName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ReservationDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.OwnerAsset.TruckName)
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            <a href="@Url.Action("Details", "Reservations", new { id=item.ReservationID })">@Html.DisplayFor(modelItem => item.Event.EventName)</a>
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.ReservationDate)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.OwnerAsset.TruckName)
-                        </td>
-                        <td class="text-center">
-                            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Owner"))
-                            {
-                                <a href="@Url.Action("Edit", "Reservations", new { id=item.ReservationID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
-
-                            }
-                            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
-                            {
-                                <a href="@Url.Action("Delete", "Reservations", new { id=item.ReservationID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
-                            }
-                        </td>
+        {
+            <div class="row mx-auto">
+                <table class="table">
+                    <tr class="text-center">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Event.EventName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReservationDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OwnerAsset.TruckName)
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </table>
-        </div>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Details", "Reservations", new { id = item.ReservationID })">@Html.DisplayFor(modelItem => item.Event.EventName)</a>
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.ReservationDate)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.OwnerAsset.TruckName)
+                            </td>
+                            <td class="text-center">
+                                @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Owner"))
+                                {
+                                    <a href="@Url.Action("Edit", "Reservations", new { id = item.ReservationID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
+
+                                }
+                                @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                                {
+                                    <a href="@Url.Action("Delete", "Reservations", new { id = item.ReservationID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
     </div>
 </section>
 
 @*<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ReservationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Event.EventName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OwnerAsset.TruckName)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Event.EventName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerAsset.TruckName)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReservationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Event.EventName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OwnerAsset.TruckName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ReservationID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ReservationID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ReservationID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Event.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnerAsset.TruckName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ReservationID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ReservationID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ReservationID })
+            </td>
+        </tr>
+    }
 
-</table>*@
+    </table>*@
