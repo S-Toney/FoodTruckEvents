@@ -37,14 +37,14 @@
                 {
                 <tr>
                     <td>
-                        <a href="@Url.Action("Details", "Events", new { id=item.TruckFoodTypeID })">@Html.DisplayFor(modelItem => item.Cuisine)</a>
+                        <a href="@Url.Action("Details", "TruckFoodTypes", new { id=item.TruckFoodTypeID })">@Html.DisplayFor(modelItem => item.Cuisine)</a>
                     </td>
 
                     @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
                     {
                         <td>
-                            <a href="@Url.Action("Edit", "Events", new { id=item.TruckFoodTypeID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
-                            <a href="@Url.Action("Delete", "Events", new { id=item.TruckFoodTypeID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
+                            <a href="@Url.Action("Edit", "TruckFoodTypes", new { id=item.TruckFoodTypeID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
+                            <a href="@Url.Action("Delete", "TruckFoodTypes", new { id=item.TruckFoodTypeID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
                         </td>
                     }
                 </tr>

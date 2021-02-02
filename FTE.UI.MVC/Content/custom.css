@@ -54,12 +54,27 @@ a.dropdown-item {
     color: #0E1B4D;
 }
 
+#mobile-nav dropdown-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+
 .table tr th {
     vertical-align: central;
     
 }
 
+/* To enlarge & prevent user rexizing of textarea */
 textarea.form-control {
     resize: none;
     height: 7em;
 }
+
+/* To allow dropdown to scroll in mobile nav 
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}*/

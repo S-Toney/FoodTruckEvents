@@ -66,12 +66,12 @@ namespace FTE.UI.MVC.Controllers
             var rvm = new ReservationViewModel();
             rvm.Locations = db.Locations.ToList();
             var reservationData = db.Reservations;
-            if (!String.IsNullOrEmpty(selectedLocation))
-            {
-                reservationData = db.Reservations.Where(s => s.Event.EventName == selectedLocation);
-            }
-            rvm.ReservationData.ToList();
-            return View(rvm);
+            //if (!String.IsNullOrEmpty(selectedLocation))
+            //{
+            //    reservationData = db.Reservations.AsQueryable(.Where(s => s.Event.EventName == selectedLocation));
+            //}
+            //rvm.ReservationData.ToList();
+            //return View(rvm);
 
             if (User.IsInRole("Owner"))
             {
