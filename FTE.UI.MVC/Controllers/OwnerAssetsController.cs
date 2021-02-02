@@ -90,7 +90,9 @@ namespace FTE.UI.MVC.Controllers
             //where o.OwnerID == User.Identity.
             ViewBag.TruckFoodTypeID = new SelectList(db.TruckFoodTypes, "TruckFoodTypeID", "Cuisine");
             ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FullName");
-            return View();
+            OwnerAsset oa = new OwnerAsset();
+            oa.OwnerID = User.Identity.GetUserId();
+            return View(oa);
         }
 
         // POST: OwnerAssets/Create
@@ -107,10 +109,10 @@ namespace FTE.UI.MVC.Controllers
             //Autoassign the date the truck is added
             ownerAsset.DateAdded = DateTime.UtcNow;
             //Autoassign the owner that is logged in
-            if (User.IsInRole("Owner"))
-            {
-                ownerAsset.OwnerID = userName;
-            }
+            //if (User.IsInRole("Owner"))
+            //{
+            //    ownerAsset.OwnerID = userName;
+            //}
 
             if (ModelState.IsValid)
             {

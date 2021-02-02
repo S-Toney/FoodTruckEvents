@@ -1,4 +1,5 @@
-﻿using FTE.UI.MVC.Models;
+﻿using FTE.DATA.EF;
+using FTE.UI.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,17 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace FTE.UI.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private FTEDBEntities db = new FTEDBEntities();
+
         public ActionResult Index()
         {
+            var events1 = db.Events1.Include(l => l.Location);
             return View();
         }
 

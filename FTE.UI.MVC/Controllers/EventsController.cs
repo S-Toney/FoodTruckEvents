@@ -17,7 +17,7 @@ namespace FTE.UI.MVC.Controllers
         // GET: Events
         public ActionResult Index()
         {
-            var events1 = db.Events1.Include(e => e.Location);
+            var events1 = db.Events1.Include(e => e.Location).ToList();
             return View(events1.ToList());
         }
 

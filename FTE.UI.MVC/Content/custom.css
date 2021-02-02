@@ -48,6 +48,9 @@ a.dropdown-item {
     color: #0E1B4D;
     display: block;
 }
+.nav-menu a:hover {
+    color: #f82249;
+}
 
 /* CSS Adjustment for Role Dropdowns in Mobile View */
 #mobile-nav ul a.dropdown-item {
@@ -72,6 +75,7 @@ textarea.form-control {
     height: 7em;
 }
 
-.border-yel {
-    border: 2px solid yellow;
+/* Landing Page */
+#intro {
+    background-image: url('images/ferrisWheelNight.jpg');
 }
