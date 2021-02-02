@@ -10,7 +10,7 @@
             <p>@ViewBag.Title</p>
             <h2>Reservation</h2>
 
-            <p class="delete-warning"><i class="fas fa-exclamation-triangle mx-2"></i>Are you sure you want to delete @Model.ReservationDate?<i class="fas fa-exclamation-triangle mx-2"></i></p>
+            <p class="delete-warning"><i class="fas fa-exclamation-triangle mx-2"></i>Are you sure you want to delete @Html.DisplayFor(model => model.Event.EventName) on @Html.DisplayFor(model => model.ReservationDate)?@*<i class="fas fa-exclamation-triangle mx-2"></i>*@</p>
             <p class="mx-auto mt-3">
                 <a href="@Url.Action("Index", "Reservations")"><i class="fas fa-caret-square-left fa-2x pl-03"></i></a>
             </p>
@@ -36,6 +36,14 @@
                         <strong>@Html.DisplayNameFor(model => model.OwnerAsset.TruckName):</strong>
                         @Html.DisplayFor(model => model.OwnerAsset.TruckName)
                     </div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group mt-3 align-items-center">
+                            <input type="submit" value="Delete" class="btn btn-default" />
+                        </div>
+                    }
                 </div>
             </div>
 

@@ -26,27 +26,31 @@
                 <table class="table">
                     <tr>
                         <th >
-                            @Html.DisplayNameFor(modelItem => modelItem.FirstName)
+                            @Html.DisplayNameFor(modelItem => modelItem.FullName)
                         </th>
                         <th>
                             @Html.DisplayNameFor(modelItem => modelItem.LastName)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(modelItem => modelItem.UserID)
+                            @*@Html.DisplayNameFor(modelItem => modelItem.OwnerAssets)*@
                         </th>
                     </tr>
 
                     @foreach (var item in Model)
                     {
+                        @*@{ 
+                            var trucks = item.OwnerAssets.Count();
+                        }*@
                         <tr>
                             <td>
-                                @*<a href="@Url.Action("Details", "UserDetails", new { id = item.UserID })">*@@Html.DisplayFor(modelItem => item.FirstName)@*</a>*@
+                                @*<a href="@Url.Action("Details", "UserDetails", new { id = item.UserID })">*@@Html.DisplayFor(modelItem => item.FullName)@*</a>*@
                             </td>
                             <td>
-                                @*<a href="@Url.Action("Details", "UserDetails", new { id = item.UserID })">*@@Html.DisplayFor(modelItem => item.LastName)@*</a>*@
+                                @*@{$"{trucks}"}*@
+                                @*<a href="@Url.Action("Details", "UserDetails", new { id = item.UserID })"></a>*@
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.UserID)
+                                @*@Html.DisplayFor(modelItem => item.UserID)*@
                                 <a href="@Url.Action("Edit", "UserDetails", new { id = item.UserID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
                                 <a href="@Url.Action("Delete", "UserDetails", new { id = item.UserID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
                             </td>

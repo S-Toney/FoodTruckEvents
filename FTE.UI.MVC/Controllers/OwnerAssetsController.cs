@@ -16,7 +16,7 @@ using FTE.UI.MVC.Models;
 
 namespace FTE.UI.MVC.Controllers
 {
-    [Authorize(Roles = "SysAdmin, Owner")]
+    //[Authorize(Roles = "SysAdmin, Owner")]
     public class OwnerAssetsController : Controller
     {
 
@@ -83,6 +83,7 @@ namespace FTE.UI.MVC.Controllers
         }
 
         // GET: OwnerAssets/Create
+        [Authorize(Roles = "SysAdmin, Owner")]
         public ActionResult Create()
         {
             //var owner = from o in db.OwnerAssets
@@ -97,6 +98,7 @@ namespace FTE.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SysAdmin, Owner")]
         public ActionResult Create([Bind(Include = "OwnerAssetID,TruckName,TruckFoodTypeID,TruckPhoto,OwnerID,SpecialNotes,IsActive,DateAdded")] OwnerAsset ownerAsset, HttpPostedFileBase truckImg)
         {
             var userName = User.Identity.GetUserId();
@@ -220,6 +222,7 @@ namespace FTE.UI.MVC.Controllers
         }
 
         // GET: OwnerAssets/Delete/5
+        [Authorize(Roles = "SysAdmin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -237,6 +240,7 @@ namespace FTE.UI.MVC.Controllers
         // POST: OwnerAssets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SysAdmin")]
         public ActionResult DeleteConfirmed(int id)
         {
             OwnerAsset ownerAsset = db.OwnerAssets.Find(id);

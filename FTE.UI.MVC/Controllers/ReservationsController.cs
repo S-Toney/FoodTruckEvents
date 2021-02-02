@@ -137,7 +137,8 @@ namespace FTE.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ReservationID,OwnerAssetID,EventID,ReservationDate")] Reservation reservation)
         {
-            // Code below enforces the location's reservatio limit
+            #region Commented out
+// Code below enforces the location's reservatio limit
             //var limit = from l in db.Locations
             //            where l.LocationID == reservation.Event.LocationID
             //            select l.ReservationLimit;
@@ -151,13 +152,15 @@ namespace FTE.UI.MVC.Controllers
             //    count++;
             //}
             //}
+            #endregion
+            
             if (ModelState.IsValid)
             {
                 //get the event associated to the reservation
                 var ev = db.Events1.Where(e => e.EventID == reservation.EventID).Single();
 
                 // Code below prevents duplicate reservations
-                var duplicateRes = db.Reservations.Where(x => x.ReservationDate == reservation.ReservationDate && x.OwnerAssetID == reservation.OwnerAssetID);
+                var duplicateRes = db.Reservations.Where(x => x.ReservationDate == ev.EventDate && x.OwnerAssetID == reservation.OwnerAssetID);
                 if (duplicateRes.Count() == 0)
                 {
 
@@ -168,7 +171,7 @@ namespace FTE.UI.MVC.Controllers
                         //Find the reservation limit for the location
                         int limit = db.Locations.Where(l => l.LocationID == resLoc).Select(l => l.ReservationLimit).Single();
                         //Get the number of reservations at the location for the same date
-                        int resNum = db.Reservations.Where(l => l.Event.LocationID == resLoc && reservation.ReservationDate == l.ReservationDate).Count();
+                        int resNum = db.Reservations.Where(l => l.Event.LocationID == resLoc && ev.EventDate == l.ReservationDate).Count();
                         //See if the number of reservations is less than the limit
                         //If < limit then add changes and redirect to index
                         if (resNum < limit)
@@ -183,7 +186,7 @@ namespace FTE.UI.MVC.Controllers
                         else
                         {
                             // Otherwise, error message that reservation limit for day & location has been reached
-                            ViewBag.ErrorMessageLimit = $"* {ev.EventName} has reached it's reservation limit for {reservation.ReservationDate:d}.";
+                            ViewBag.ErrorMessageLimit = $"* {ev.EventName} has reached it's reservation limit for {ev.EventDate:d}.";
                         }
                     }
                     else

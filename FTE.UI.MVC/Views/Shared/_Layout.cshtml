@@ -23,6 +23,7 @@
     <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Content/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="~/Content/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/Content/css/jquery.dataTables.min.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
     <link href="~/Content/css/style.css" rel="stylesheet">
@@ -106,9 +107,10 @@
                                             Employee
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="@Url.Action("", "")">Reservation Report</a>
+                                            @*<a class="dropdown-item" href="@Url.Action("", "")">Reservation Report</a>*@
                                             <a class="dropdown-item" href="@Url.Action("Index", "Events")">Events</a>
-                                            <a class="dropdown-item" href="@Url.Action("Index", "Reservations")">Resercations</a>
+                                            <a class="dropdown-item" href="@Url.Action("Index", "Reservations")">Reservations</a>
+                                            <a class="dropdown-item" href="@Url.Action("Index", "OwnerAssets")">Trucks</a>
                                         </div>
                                     </li>
                                 }
@@ -255,6 +257,8 @@
     <script src="~/Content/vendor/superfish/superfish.min.js"></script>
     <script src="~/Content/vendor/hoverIntent/hoverIntent.js"></script>
     <script src="~/Content/vendor/aos/aos.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+
     <!-- Template Main JS File -->
     <script src="~/Content/js/main.js"></script>
 
