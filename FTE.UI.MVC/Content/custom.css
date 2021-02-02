@@ -71,3 +71,7 @@ textarea.form-control {
     resize: none;
     height: 7em;
 }
+
+.border-yel {
+    border: 2px solid yellow;
+}
