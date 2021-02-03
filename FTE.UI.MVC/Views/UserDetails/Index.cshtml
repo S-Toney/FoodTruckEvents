@@ -25,10 +25,10 @@
             <div class="col-md-4">
                 <table class="table">
                     <tr>
-                        <th >
+                        <th class="align-middle">
                             @Html.DisplayNameFor(modelItem => modelItem.FullName)
                         </th>
-                        <th>
+                        <th class="align-middle">
                             @Html.DisplayNameFor(modelItem => modelItem.LastName)
                         </th>
                         <th>
@@ -42,14 +42,14 @@
                             var trucks = item.OwnerAssets.Count();
                         }*@
                         <tr>
-                            <td>
+                            <td class="align-middle">
                                 @*<a href="@Url.Action("Details", "UserDetails", new { id = item.UserID })">*@@Html.DisplayFor(modelItem => item.FullName)@*</a>*@
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 @*@{$"{trucks}"}*@
                                 @*<a href="@Url.Action("Details", "UserDetails", new { id = item.UserID })"></a>*@
                             </td>
-                            <td>
+                            <td class="align-middle"> 
                                 @*@Html.DisplayFor(modelItem => item.UserID)*@
                                 <a href="@Url.Action("Edit", "UserDetails", new { id = item.UserID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
                                 <a href="@Url.Action("Delete", "UserDetails", new { id = item.UserID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>

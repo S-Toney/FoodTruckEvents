@@ -6,12 +6,10 @@
 
 
 <section id="contact" class="section-bg">
-
     <div class="container" data-aos="fade-up">
-
         <div class="section-header">
             <h2>@ViewBag.Title</h2>
-            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin"))
             {
                 <p class="mx-auto">
                     <a href="@Url.Action("Create", "TruckFoodTypes")"><i class="fas fa-plus-square fa-2x pl-03"></i></a>
@@ -19,38 +17,33 @@
             }
         </div>
         <div class="row mx-auto">
-            <table class="table">
-                @*<tr>
-                    <th>
-                        Cuisine
-                    </th>
-
-                    @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
-                    {
-                        <th>
-
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <table class="table">
+                    <tr>
+                        <th class="align-middle">
+                            @Html.DisplayNameFor(modelItem => modelItem.Cuisine)
                         </th>
-                    }
-                </tr>*@
-
-                @foreach (var item in Model)
-                {
-                <tr>
-                    <td>
-                        <a href="@Url.Action("Details", "TruckFoodTypes", new { id=item.TruckFoodTypeID })">@Html.DisplayFor(modelItem => item.Cuisine)</a>
-                    </td>
-
-                    @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                        <th>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
                     {
-                        <td>
-                            <a href="@Url.Action("Edit", "TruckFoodTypes", new { id=item.TruckFoodTypeID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
-                            <a href="@Url.Action("Delete", "TruckFoodTypes", new { id=item.TruckFoodTypeID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
-                        </td>
+                        <tr>
+                            <td class="align-middle">
+                                <a href="@Url.Action("Details", "TruckFoodTypes", new { id=item.TruckFoodTypeID })">@Html.DisplayFor(modelItem => item.Cuisine)</a>
+                            </td>
+                            <td class="align-middle">
+                                <a href="@Url.Action("Edit", "TruckFoodTypes", new { id=item.TruckFoodTypeID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
+                                @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                                {<a href="@Url.Action("Delete", "TruckFoodTypes", new { id=item.TruckFoodTypeID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
+                                }
+                            </td>
+                        </tr>
                     }
-                </tr>
-                }
-
-            </table>
+                </table>
+            </div>
+            <div class="col-md-4"></div>
         </div>
     </div>
 </section>

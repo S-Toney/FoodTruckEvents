@@ -11,10 +11,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="Content/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="Content/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="Content/images/favicon-16x16.png">
-    <link rel="manifest" href="Content/images/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Content/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Content/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Content/images/favicon-16x16.png">
 
     @*@Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")*@
@@ -62,10 +61,30 @@
                 <h1>
                     <img src="~/Content/images/favicon-32x32.png" /> <a href="@Url.Action("Index", "Home")">FT<span>Events</span></a>
                 </h1>
-                <!-- <a href="index.html" class="scrollto"><img src="assets/img/logo.png" alt="" title=""></a>-->            
+                <!-- <a href="index.html" class="scrollto"><img src="assets/img/logo.png" alt="" title=""></a>-->
             </div>
             <div class="pull-left d-none d-md-block">
-                    @Html.Partial("_LoginPartial")
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <ul class="nav-menu d-inline-block">
+                            <li class="greeting">
+                                Hello @User.Identity.Name!
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <ul class="nav-menu d-inline-block">
+                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
             </div>
             <!-- Nav -->
             <nav id="nav-menu-container">
@@ -74,12 +93,9 @@
                     <li class="menu-active"><a href="@Url.Action("Index", "Home")">Home</a></li>
                     <li><a href="@Url.Action("About", "Home")">About</a></li>
                     <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
-                    <li class="d-block d-md-none">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                    @*<li><a href="#schedule">Schedule</a></li>
-        <li><a href="#venue">Venue</a></li>
-        <li><a href="#hotels">Hotels</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#supporters">Sponsors</a></li>*@
+
+
+
 
                     <!-- Admininstration Dropdown -->
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
@@ -93,8 +109,8 @@
                                 <a class="dropdown-item" href="@Url.Action("Index", "Locations")">Locations</a>
                                 <a class="dropdown-item" href="@Url.Action("Index", "Events")">Events</a>
                                 <a class="dropdown-item" href="@Url.Action("Index", "Reservations")">Reservations</a>
-                                <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">Owners</a>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">User Detials</a>                    
                                 <a class="dropdown-item" href="@Url.Action("Index", "RolesAdmin")">Roles</a>
                                 @*<a class="dropdown-item" href="@Url.Action("Index", "Employees")">Employees</a>*@
                                 @*<a class="dropdown-item" href="@Url.Action("Index", "ReservationLimits")">Reservation Limits</a>*@
@@ -129,7 +145,7 @@
                                 <a class="dropdown-item" href="@Url.Action("Index", "OwnerAssets")">Trucks</a>
                                 <a class="dropdown-item" href="@Url.Action("Index", "Events")">Events</a>
                                 <a class="dropdown-item" href="@Url.Action("Index", "Reservations")">Reservations</a>
-                                <a class="dropdown-item" href="@Url.Action("Index", "Users")">Account</a>
+                                @*<a class="dropdown-item" href="@Url.Action("Index", "Users")">Account</a>*@
                             </div>
                         </li>
                     }
@@ -153,15 +169,29 @@
                                 <a class="dropdown-item" href="@Url.Action("Index", "UsersAdmin")">Users Admin</a>
                                 <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">User Details</a>
                                 <a class="dropdown-item" href="@Url.Action("Index", "Account")">Account</a>
-                                @*<a class="dropdown-item" href="@Url.Action("Index", "ReservationLimits")">Reservation Limits</a>*@
-
-
-
-                                @*<a class="dropdown-item" href="@Url.Action("Index", "Manage")">Manage</a>*@
                             </div>
                         </li>
                     }
                     <!-- End System Adminsitrator Dropdown -->
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <li class="d-block d-md-none">
+                                @Html.ActionLink("Hello " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            </li>
+                            <li class="d-block d-md-none"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="d-block d-md-none">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    }
+
+
                     @*<li><a href="@Url.Action("Login", "Account")">Login</a></li>*@
 
                     @*<li class="buy-tickets"><a href="#buy-tickets">Event Scheduler</a></li>*@
@@ -182,37 +212,40 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-3 col-md-6 footer-info">
+                    <div class="col-lg-4 col-md-6 footer-info p-2e">
                         <h1>
                             <img src="~/Content/images/favicon-32x32.png" /> <a href="#intro">FT<span>Events</span></a>
                         </h1>
-                        <p>In alias aperiam. Placeat tempore facere. Officiis voluptate ipsam vel eveniet est dolor et totam porro. Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In inventore consequatur ad voluptate cupiditate debitis accusamus repellat cumque.</p>
+                        <p>Food Truck Events is dedicated to continually providing pristine locations for community evets year-round. We have indoor and outdoor locations in multiple states. Reserve your place at our events and let us bring the hungry people to you!</p>
 
                     </div>
 
-                    <div class="col-lg-3 col-md-6 footer-links">
+                    <div class="col-lg-4 col-md-6 footer-links p-2e">
                         <h4>Useful Links</h4>
                         <ul>
-                            <li><i class="fas fa-angle-right"></i> <a href="#">Home</a></li>
-                            <li><i class="fas fa-angle-right"></i> <a href="#">About us</a></li>
-                            <li><i class="fas fa-angle-right"></i> <a href="#">Services</a></li>
-                            <li><i class="fas fa-angle-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="fas fa-angle-right"></i> <a href="#">Privacy policy</a></li>
+                            <li><i class="fas fa-angle-right"></i> <a href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li><i class="fas fa-angle-right"></i> <a href="@Url.Action("About", "Home")">About us</a></li>
+                            <li><i class="fas fa-angle-right"></i> <a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
+                            @*<li><i class="fas fa-angle-right"></i> <a href="#">Terms of service</a></li>
+                                <li><i class="fas fa-angle-right"></i> <a href="#">Privacy policy</a></li>*@
                         </ul>
+                        <div class="copyright">
+                            &copy; @DateTime.Now.Year
+                        </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><i class="fas fa-angle-right"></i> <a href="#">Home</a></li>
-                            <li><i class="fas fa-angle-right"></i> <a href="#">About us</a></li>
-                            <li><i class="fas fa-angle-right"></i> <a href="#">Services</a></li>
-                            <li><i class="fas fa-angle-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="fas fa-angle-right"></i> <a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
+                    @*<div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Useful Links</h4>
+                            <ul>
+                                <li><i class="fas fa-angle-right"></i> <a href="#">Home</a></li>
+                                <li><i class="fas fa-angle-right"></i> <a href="#">About us</a></li>
+                                <li><i class="fas fa-angle-right"></i> <a href="#">Services</a></li>
+                                <li><i class="fas fa-angle-right"></i> <a href="#">Terms of service</a></li>
+                                <li><i class="fas fa-angle-right"></i> <a href="#">Privacy policy</a></li>
+                            </ul>
+                        </div>*@
 
-                    <div class="col-lg-3 col-md-6 footer-contact">
+                    <div class="col-lg-4 col-md-6 footer-contact p-2e">
                         <h4>Contact Us</h4>
                         <p>
                             2200 N Event Ln <br>
@@ -221,9 +254,7 @@
                             <strong>Phone:</strong> +1 555-867-5309<br>
                             <strong>Email:</strong> info@FTEvents.com<br>
                         </p>
-                        <div class="copyright">
-                            &copy; @DateTime.Now.Year
-                        </div>
+
                         @*<div class="social-links">
                                 <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
                                 <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
@@ -266,7 +297,7 @@
 
     @RenderSection("scripts", required: false)
     @*<style>
-        div{border:1px solid yellow;}
-    </style>*@
+            div{border:1px solid yellow;}
+        </style>*@
 </body>
 </html>

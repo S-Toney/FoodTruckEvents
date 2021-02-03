@@ -29,6 +29,10 @@
     padding-left: 4.5em;
 }
 
+.p-2e {
+    padding: 2em;
+}
+
 .text-md {
     font-size: 1.5em;
     line-height: 1.2;
@@ -42,6 +46,13 @@
 /*h2 {
     overflow-wrap: break-word;
 } This code was replaced with C# substrings in the necessary views.*/
+
+/* Nav CSS Adjustments */
+@media (min-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 100%;
+    }
+}
 
 /* CSS Adjustment for Role Dropdowns */
 a.dropdown-item {
@@ -78,4 +89,16 @@ textarea.form-control {
 /* Landing Page */
 #intro {
     background-image: url('images/ferrisWheelNight.jpg');
+}
+
+/* User Greeting */
+.greeting {
+    padding: 8px;
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(202, 206, 221, 0.8);
+    font-family: "Raleway", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    outline: none;
 }

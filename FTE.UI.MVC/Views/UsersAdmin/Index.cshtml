@@ -16,37 +16,44 @@
                 </p>
             }
             </div>
-        <div class="row mx-auto">
-            <table class="table">
-                <tr>
-                    <th>
-                        User Name
-                    </th>
-                    @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
-                    {
-                        <th>
 
-                        </th>
-                    }
-                    </tr>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="row mx-auto">
+                    <table class="table">
+                        <tr>
+                            <th class="align-middle">
+                                User Name
+                            </th>
+                            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                            {
+                                <th>
 
-                @foreach (var item in Model)
-                {
-                <tr>
-                    <td>
-                        <a href="@Url.Action("Details", "UsersAdmin", new { id = item.Id })">@Html.DisplayFor(modelItem => item.UserName)</a>
-                    </td>
-                    @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
-                    {
-                        <td>
-                            <a href="@Url.Action("Edit", "UsersAdmin", new { id = item.Id })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
-                            <a href="@Url.Action("Delete", "UsersAdmin", new { id = item.Id })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
-                        </td>
-                    }
-                    </tr>
-                }
+                                </th>
+                            }
+                        </tr>
 
-            </table>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="align-middle">
+                                    <a href="@Url.Action("Details", "UsersAdmin", new { id = item.Id })">@Html.DisplayFor(modelItem => item.UserName)</a>
+                                </td>
+                                @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                                {
+                                    <td class="align-middle">
+                                        <a href="@Url.Action("Edit", "UsersAdmin", new { id = item.Id })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
+                                        <a href="@Url.Action("Delete", "UsersAdmin", new { id = item.Id })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
         </div>
     </div>
 </section>

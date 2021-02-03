@@ -21,13 +21,13 @@
             @*contact-info*@
             <table class="table">
                 <tr class="text-center">
-                    <th>
+                    <th class="align-middle">
                         @Html.DisplayNameFor(modelItem => modelItem.TruckName)
                     </th>
-                    <th>
+                    <th class="align-middle">
                         @Html.DisplayNameFor(modelItem => modelItem.IsActive)
                     </th>
-                    <th>
+                    <th class="align-middle">
                         @Html.DisplayNameFor(modelItem => modelItem.TruckFoodType.Cuisine)
                     </th>
                     <th></th>
@@ -36,18 +36,18 @@
                 @foreach (var item in Model)
                 {
                 <tr>
-                    <td>
+                    <td class="align-middle">
                         <a href="@Url.Action("Details", "OwnerAssets", new { id=item.OwnerAssetID })">@Html.DisplayFor(modelItem => item.TruckName)</a>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center align-middle">
                         @Html.DisplayFor(modelItem => item.IsActive)
                     </td>
 
-                    <td>
+                    <td class="align-middle">
                         @Html.DisplayFor(modelItem => item.TruckFoodType.Cuisine)
                     </td>
 
-                    <td class="text-center">
+                    <td class="text-center align-middle">
                         <a href="@Url.Action("Edit", "OwnerAssets", new { id=item.OwnerAssetID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
                         @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
                         {

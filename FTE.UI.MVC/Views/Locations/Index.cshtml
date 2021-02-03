@@ -18,14 +18,14 @@
             @*contact-info*@
             <table class="table">
                 <tr class="text-center">
-                    <th>
-                        Event Location
+                    <th class="align-middle">
+                        @Html.DisplayNameFor(modelItem => modelItem.LocationName)
                     </th>
-                    <th>
-                        State
+                    <th class="align-middle">
+                        @Html.DisplayNameFor(modelItem => modelItem.State)
                     </th>
-                    <th>
-                        Reservation Limit
+                    <th class="align-middle">
+                        @Html.DisplayNameFor(modelItem => modelItem.ReservationLimit)
                     </th>
                     <th></th>
                 </tr>
@@ -33,16 +33,16 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td class="align-middle">
                             <a href="@Url.Action("Details", "Locations", new { id = item.LocationID })">@Html.DisplayFor(modelItem => item.LocationName)</a>
                         </td>
-                        <td class="text-center">
+                        <td class="text-center align-middle">
                             @Html.DisplayFor(modelItem => item.State)
                         </td>
-                        <td class="text-center">
+                        <td class="text-center align-middle">
                             @Html.DisplayFor(modelItem => item.ReservationLimit)
                         </td>
-                        <td class="text-center">
+                        <td class="text-center align-middle">
                             <a href="@Url.Action("Edit", "Locations", new { id = item.LocationID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
                             <a href="@Url.Action("Delete", "Locations", new { id = item.LocationID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
                         </td>

@@ -18,66 +18,73 @@
                 </p>
             }
         </div>
-        @using (Html.BeginForm("Index", "Reservations"))
-        {
-            <div class="row mx-auto">
-                <table class="table data-table table-striped">
-                    <thead>
-                        <tr class="text-center">
-                            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Employee"))
-                            {
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Event.Location.LocationName)
-                                </th>
-                            }
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Event.EventName)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.ReservationDate)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.OwnerAsset.TruckName)
-                                </th>
-                                <th></th>
-                            </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                        <tr>
-                            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Employee"))
-                            {
-                                <td>
-                                    @*<a href="@Url.Action("Details", "Locations", new { id = item.Event.LocationID })">*@@Html.DisplayFor(modelItem => item.Event.Location.LocationName)@*</a>*@
-                                </td>
-                            }
-                                <td>
-                                    <a href="@Url.Action("Details", "Reservations", new { id = item.ReservationID })">@Html.DisplayFor(modelItem => item.Event.EventName)</a>
-                                </td>
-                                <td class="text-center">
-                                    @Html.DisplayFor(modelItem => item.ReservationDate)
-                                </td>
-                                <td class="text-center">
-                                    @Html.DisplayFor(modelItem => item.OwnerAsset.TruckName)
-                                </td>
-                                <td class="text-center">
-                                    @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Owner"))
+        
+        <div class="row">
+            <div class="col-md-2 col-lg-4"></div>
+            <div class="col-md-8 col-lg-4">
+                @using (Html.BeginForm("Index", "Reservations"))
+                {
+                    <div class="row mx-auto">
+                        <table class="table data-table table-striped mx-auto">
+                            <thead>
+                                <tr class="text-center">
+                                    @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Employee"))
                                     {
-                                        <a href="@Url.Action("Edit", "Reservations", new { id = item.ReservationID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
+                                        <th class="align-middle">
+                                            @Html.DisplayNameFor(model => model.Event.Location.LocationName)
+                                        </th>
+                                    }
+                                    <th class="align-middle">
+                                        @Html.DisplayNameFor(model => model.Event.EventName)
+                                    </th>
+                                    <th class="align-middle">
+                                        @Html.DisplayNameFor(model => model.ReservationDate)
+                                    </th>
+                                    <th class="align-middle">
+                                        @Html.DisplayNameFor(model => model.OwnerAsset.TruckName)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                        {
+                                            <td class="align-middle">
+                                                @*<a href="@Url.Action("Details", "Locations", new { id = item.Event.LocationID })">*@@Html.DisplayFor(modelItem => item.Event.Location.LocationName)@*</a>*@
+                                            </td>
+                                        }
+                                        <td class="align-middle">
+                                            <a href="@Url.Action("Details", "Reservations", new { id = item.ReservationID })">@Html.DisplayFor(modelItem => item.Event.EventName)</a>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.ReservationDate)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.OwnerAsset.TruckName)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Owner"))
+                                            {
+                                                <a href="@Url.Action("Edit", "Reservations", new { id = item.ReservationID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
 
-                                    }
-                                    @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
-                                    {
-                                        <a href="@Url.Action("Delete", "Reservations", new { id = item.ReservationID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
-                                    }
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                            }
+                                            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                                            {
+                                                <a href="@Url.Action("Delete", "Reservations", new { id = item.ReservationID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
             </div>
-        }
+            <div class="col-md-2 col-lg-4"></div>
+        </div>
     </div>
 </section>
 

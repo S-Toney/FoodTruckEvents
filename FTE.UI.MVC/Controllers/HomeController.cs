@@ -17,8 +17,8 @@ namespace FTE.UI.MVC.Controllers
 
         public ActionResult Index()
         {
-            var events1 = db.Events1.Include(l => l.Location);
-            return View();
+            var events1 = db.Events1.Include(l => l.Location).OrderBy(e => e.EventDate);
+            return View(events1);
         }
 
         public ActionResult About()

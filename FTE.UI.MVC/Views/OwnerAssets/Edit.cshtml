@@ -58,6 +58,10 @@
                                 @Html.ValidationMessageFor(model => model.OwnerID, "", new { @class = "text-danger" })
                             </div>
                         }
+                        else
+                        {
+                                @Html.HiddenFor(model => model.OwnerID)
+                        }
                     </div>
                 }
                     <!-- Truck Notes -->
