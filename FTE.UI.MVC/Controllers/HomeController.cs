@@ -57,7 +57,7 @@ namespace FTE.UI.MVC.Controllers
 
             msg.IsBodyHtml = true;
             SmtpClient client = new SmtpClient("mail.tessatoney.com");
-            client.Credentials = new NetworkCredential("no-reply@tessatoney.com", "20Cen$us20");//Change to ******** before pushing to GitHub but use password for deploy
+            client.Credentials = new NetworkCredential("no-reply@tessatoney.com", "24qBIjF@d0");//Change to ******** before pushing to GitHub but use password for deploy
 
             try
             {

@@ -18,14 +18,14 @@
                 </p>
             }
         </div>
-        
+
         <div class="row">
             <div class="col-md-2 col-lg-4"></div>
             <div class="col-md-8 col-lg-4">
                 @using (Html.BeginForm("Index", "Reservations"))
                 {
                     <div class="row mx-auto">
-                        <table class="table data-table table-striped mx-auto">
+                        <table class="table data-table table-striped mx-auto display">
                             <thead>
                                 <tr class="text-center">
                                     @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Employee"))
@@ -89,19 +89,28 @@
 </section>
 
 
+
+
 @section scripts{
-    <script>
-		//apply the jQuery plugin
-		$(document).ready(function () {
-			$(".data-table").DataTable({
-				//This will sort by Book Title, ascending
-				"order": [[1, "asc"]]
-				//Example of additional customizations that you can do to the Datatables plug
-				//Full documentation on customizations for the plugin are found at datatables.net
-			});
-		});
-    </script>
+<script>
+    $(document).ready(function () {
+    $('.display').DataTable({responsive: true});
+    });
+
+
+
+      //apply the jQuery plugin
+        //$(document).ready(function () {
+            //$(".data-table").DataTable({
+                //This will sort by Book Title, ascending
+                //"order": [[1, "asc"]]
+                //Example of additional customizations that you can do to the Datatables plug
+                //Full documentation on customizations for the plugin are found at datatables.net
+            //});
+        //});
+</script>
 }
+
 
 
 @*<h2>Index</h2>
