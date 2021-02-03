@@ -110,7 +110,7 @@
                                 <a class="dropdown-item" href="@Url.Action("Index", "Events")">Events</a>
                                 <a class="dropdown-item" href="@Url.Action("Index", "Reservations")">Reservations</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">User Detials</a>                    
+                                <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">User Detials</a>
                                 <a class="dropdown-item" href="@Url.Action("Index", "RolesAdmin")">Roles</a>
                                 @*<a class="dropdown-item" href="@Url.Action("Index", "Employees")">Employees</a>*@
                                 @*<a class="dropdown-item" href="@Url.Action("Index", "ReservationLimits")">Reservation Limits</a>*@
@@ -226,8 +226,10 @@
                             <li><i class="fas fa-angle-right"></i> <a href="@Url.Action("Index", "Home")">Home</a></li>
                             <li><i class="fas fa-angle-right"></i> <a href="@Url.Action("About", "Home")">About us</a></li>
                             <li><i class="fas fa-angle-right"></i> <a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
-                            @*<li><i class="fas fa-angle-right"></i> <a href="#">Terms of service</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="#">Privacy policy</a></li>*@
+                            <li>
+                                <i class="fas fa-angle-right"></i> <a href="@Url.Content("~/Content/FTEDocumentation.pdf")" target="_blank">Project Documentation</a>
+                            </li>
+                            @*<li><i class="fas fa-angle-right"></i> <a href="#">Privacy policy</a></li>*@
                         </ul>
                         <div class="copyright">
                             &copy; @DateTime.Now.Year
