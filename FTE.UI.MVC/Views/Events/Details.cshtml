@@ -23,10 +23,10 @@
 
             </div>
 
-            <div class="col-md-4">
-                <div class="pl-045">
+            <div class="col-md-4 text-md">
+                <div class="">
                     <div>
-                        @Html.DisplayNameFor(model => model.EventDate):
+                        <strong>@Html.DisplayNameFor(model => model.EventDate):</strong>
                         @Html.DisplayFor(model => model.EventDate)
                     </div>
                     <div>
@@ -34,15 +34,15 @@
                         @Html.DisplayNameFor(model => model.IsCancelled)
                     </div>
                     <div>
-                        @Html.DisplayNameFor(model => model.Location.LocationName):<br />
+                        <strong>@Html.DisplayNameFor(model => model.Location.LocationName):</strong><br />
                         @Html.DisplayFor(model => model.Location.LocationName)
                     </div>
                     <div>
-                        @Html.DisplayNameFor(model => model.Location.ReservationLimit):<br />
+                        <strong>@Html.DisplayNameFor(model => model.Location.ReservationLimit):</strong><br />
                         @Html.DisplayFor(model => model.Location.ReservationLimit)
                     </div>
                     <div>
-                        @Html.DisplayNameFor(model => model.Notes):<br />
+                        <strong>@Html.DisplayNameFor(model => model.Notes):</strong><br />
                         @Html.DisplayFor(model => model.Notes)
                     </div>
                 </div>

@@ -16,7 +16,7 @@ namespace FTE.UI.MVC.Controllers
         private FTEDBEntities db = new FTEDBEntities();
 
         // GET: Locations
-        [Authorize(Roles = "Admin, SysAdmin")]
+        //[Authorize(Roles = "Admin, SysAdmin")]
         public ActionResult Index()
         {
             return View(db.Locations.ToList());

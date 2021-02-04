@@ -3,7 +3,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<!-- ======= Intro Section ======= -->
+<!--  Intro Section  -->
 <section id="intro">
     <div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
         <h1 class="mb-4 pb-0">Schedule<br><span>Your Trucks</span> Today</h1>
@@ -529,7 +529,7 @@
                 </div>
             </section><!-- End Subscribe Section -->*@
     </div>
-    <!-- ======= Buy Ticket Section ======= -->
+    <!--  Upcomig Events  -->
     <section id="buy-tickets" class="section-with-bg">
         <div class="container" data-aos="fade-up">
 
@@ -547,29 +547,26 @@
                                 <h5 class="card-title text-muted text-uppercase text-center">@item.Location.LocationName</h5>
                                 <h6 class="card-price text-center">@item.EventName</h6>
                                 <h4 class="text-center mt-2">@Html.DisplayFor(modelItem => item.EventDate)</h4>
-                                <!-- <hr>
-                                <ul class="fa-ul">-->
+                                 @*<hr>
+                                <ul class="fa-ul">
                                 @{
-                                    //TODO  Addthe list of trucks already scheduled to be at the event here
+                                    //TODO  Addthe list of trucks already scheduled to be at the event here as well as a truck icon with no name associated to show the remaining available slots
                                 }
-                                <!--<li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
-                                <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
-                                <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>Community Access</li>
-                                <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>Workshop Access</li>
-                                <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>After Party</li>-->
-                                <!-- </ul>
-                                <hr>-->
+                                <li><span class="fa-li"><i class="fas fa-truck"></i></span>Scheduled Truck</li>
+                                <li class="text-muted"><span class="fa-li"><i class="fas fa-truck"></i></span>Available</li>
+                                </ul>
+                                <hr>*@
                                 <div class="text-center">
                                     @if (User.Identity.IsAuthenticated)
                                     {
+
+                                        //TODO Allow registration through modal instead of redirecting to reservation create
                                         <a href="@Url.Action("Create", "Reservations")" class="btn btn-default">Schedule</a>
                                         @*<a type="button" class="btn btn-default" href="@Url.Action("Create", "Reservations")" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="standard-access"> Schedule </ a >*@
                                     }
                                     else
                                     {
                                         <a href="@Url.Action("Create", "Reservations")" class="btn btn-default">Schedule</a>
-                                        @*<button type="button" class="btn btn-default" href="@Url.Action("Login", "Account")" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="standard-access"> Schedule </ button >*@
                                     }
                                 </div>
                             </div>

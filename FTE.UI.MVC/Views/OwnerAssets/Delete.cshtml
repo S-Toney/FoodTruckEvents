@@ -10,9 +10,9 @@
             <p>@ViewBag.Title</p>
             <h2>@Model.TruckName</h2>
 
-            <p class="delete-warning"><i class="fas fa-exclamation-triangle mx-2"></i>Are you sure you want to delete @Model.TruckName?<i class="fas fa-exclamation-triangle mx-2"></i></p>
+            <p class="delete-warning"><i class="fas fa-exclamation-triangle mx-2"></i>Are you sure you want to delete @Model.TruckName?</p>
             <p class="mx-auto mt-3">
-                <a href="@Url.Action("Index", "TruckFoodTypes")"><i class="fas fa-caret-square-left fa-2x pl-03"></i></a>
+                <a href="@Url.Action("Index", "OwnerAssets")"><i class="fas fa-caret-square-left fa-2x pl-03"></i></a>
             </p>
         </div>
         <div class="row contact-info">
@@ -21,7 +21,7 @@
             <div class="col-md-4 text-md">
                 <!-- Truck Image -->
                 <div class="col-md-6 mb-4">
-                    <img src="~/Content/images/@Model.TruckPhoto" alt="@Model.TruckName" title="@Model.TruckPhoto" class="img-fluid" />
+                    <img src="~/Content/images/@Model.TruckPhoto" alt="@Model.TruckName" title="@Model.TruckPhoto" class="img-fluid mx-auto" />
                 </div>
                 @using (Html.BeginForm())
                 {

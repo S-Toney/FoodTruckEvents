@@ -48,11 +48,6 @@ namespace FTE.UI.MVC.Controllers
         // GET: Reservations
         public ActionResult Index(string selectedLocation = "All")
         {
-            //var userRes = (from r in db.Reservations
-            //               join ow in db.OwnerAssets on r.OwnerAssetID equals ow.OwnerAssetID
-            //               join ud in db.UserDetails1 on ow.OwnerID equals ud.UserID
-            //               where ud.UserID == userName 
-            //               select new { r.Event, r.OwnerAsset }).ToList;
             var userName = User.Identity.GetUserId();
             var reservations = db.Reservations.Include(r => r.Event).Include(r => r.OwnerAsset);
 
@@ -86,10 +81,6 @@ namespace FTE.UI.MVC.Controllers
                 }
                 return View(userRes);
             }
-            //if (User.IsInRole("Employee"))
-            //{
-            //    return View();
-            //}
             else
             {
                 return View(reservations);
@@ -116,15 +107,16 @@ namespace FTE.UI.MVC.Controllers
         [Authorize(Roles = "SysAdmin, Admin, Owner")]
         public ActionResult Create()
         {
-            //Only show owner's trucks for options
+            //Only show owner's trucks for options in the dropdown
             var userName = User.Identity.GetUserId();
             if (User.IsInRole("Owner"))
             {
+                //TODO Only allow events that are tomorrow or forward to show in the reservation dropdown
                 ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes");
                 ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets.Where(x => x.OwnerID == userName), "OwnerAssetID", "TruckName");
                 return View();
             }
-
+            //TODO Only allow events that are tomorrow or forward to show in the reservation dropdown
             ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes");
             ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "TruckName");
             return View();
@@ -192,10 +184,7 @@ namespace FTE.UI.MVC.Controllers
                     else
                     {
                         //Admin can add reservation regardless of limit
-                        //get the reservation ddate from the event
                         reservation.ReservationDate = ev.EventDate;
-
-
                         db.Reservations.Add(reservation);
                         db.SaveChanges();
                         return RedirectToAction("Index");
@@ -203,7 +192,7 @@ namespace FTE.UI.MVC.Controllers
                 }
                 else
                 {
-                    ViewBag.ErrorMessageDup = $"* This truck already has a reservation on {reservation.ReservationDate:d}.";
+                    ViewBag.ErrorMessageDup = $"* This truck already has a reservation on {ev.EventDate:d}.";
                     //return View();
                 }
                 //db.Reservations.Add(reservation);
@@ -247,6 +236,8 @@ namespace FTE.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ReservationID,OwnerAssetID,EventID,ReservationDate")] Reservation reservation)
         {
+
+            //TODO Add checks for duplicate reservations and reservation limit to Edit
             var ev = db.Events1.Where(e => e.EventID == reservation.EventID).Single();
             if (ModelState.IsValid)
             {

@@ -155,7 +155,7 @@ namespace IdentitySample.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-
+                    //This code was added to populate the UserDetials table on registration
                     #region Custom User Details
                     UserDetails newUserDetails = new UserDetails();
                     newUserDetails.UserID = user.Id;
@@ -172,6 +172,7 @@ namespace IdentitySample.Controllers
                     //ViewBag.Link = callbackUrl;
                     //return View("DisplayEmail");
 
+                    //Below designates the new user as an owner by default
                     UserManager.AddToRole(user.Id, "Owner");
                     return RedirectToAction("Index", "Home");
 
