@@ -74,12 +74,6 @@ a.dropdown-item {
     overflow-x: hidden;
 }
 
-
-.table tr th {
-    vertical-align: central;
-    
-}
-
 /* To enlarge & prevent user rexizing of textarea */
 textarea.form-control {
     resize: none;

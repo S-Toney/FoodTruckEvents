@@ -16,7 +16,7 @@ using FTE.UI.MVC.Models;
 
 namespace FTE.UI.MVC.Controllers
 {
-    //[Authorize(Roles = "SysAdmin, Owner")]
+    [Authorize]
     public class OwnerAssetsController : Controller
     {
 
@@ -91,6 +91,7 @@ namespace FTE.UI.MVC.Controllers
             ViewBag.TruckFoodTypeID = new SelectList(db.TruckFoodTypes, "TruckFoodTypeID", "Cuisine");
             ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FullName");
             OwnerAsset oa = new OwnerAsset();
+            //Autoassign the owner that is logged in
             oa.OwnerID = User.Identity.GetUserId();
             return View(oa);
         }
@@ -109,10 +110,6 @@ namespace FTE.UI.MVC.Controllers
             //Autoassign the date the truck is added
             ownerAsset.DateAdded = DateTime.UtcNow;
             //Autoassign the owner that is logged in
-            //if (User.IsInRole("Owner"))
-            //{
-            //    ownerAsset.OwnerID = userName;
-            //}
 
             if (ModelState.IsValid)
             {
@@ -149,7 +146,6 @@ namespace FTE.UI.MVC.Controllers
             }
 
             ViewBag.TruckFoodTypeID = new SelectList(db.TruckFoodTypes, "TruckFoodTypeID", "Cuisine", ownerAsset.TruckFoodTypeID);
-
             ViewBag.OwnerID = new SelectList(db.UserDetails1, "UserID", "FullName", ownerAsset.OwnerID);
             return View(ownerAsset);
         }

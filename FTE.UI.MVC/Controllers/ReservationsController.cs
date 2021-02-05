@@ -13,9 +13,9 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace FTE.UI.MVC.Controllers
 {
+    [Authorize]
     public class ReservationsController : Controller
     {
-
         //Getting Roles & Users
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
