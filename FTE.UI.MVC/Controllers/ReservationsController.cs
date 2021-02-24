@@ -109,15 +109,16 @@ namespace FTE.UI.MVC.Controllers
         {
             //Only show owner's trucks for options in the dropdown
             var userName = User.Identity.GetUserId();
+            var events1 = db.Events1.Include(l => l.Location).Where(e => e.EventDate > DateTime.UtcNow).OrderBy(e => e.EventDate);
             if (User.IsInRole("Owner"))
             {
                 //TODO Only allow events that are tomorrow or forward to show in the reservation dropdown
-                ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes");
+                ViewBag.EventID = new SelectList(events1, "EventID", "SelectRes");
                 ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets.Where(x => x.OwnerID == userName), "OwnerAssetID", "TruckName");
                 return View();
             }
             //TODO Only allow events that are tomorrow or forward to show in the reservation dropdown
-            ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes");
+            ViewBag.EventID = new SelectList(events1, "EventID", "SelectRes");
             ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "TruckName");
             return View();
         }
@@ -212,6 +213,7 @@ namespace FTE.UI.MVC.Controllers
         [Authorize(Roles = "SysAdmin, Admin, Owner")]
         public ActionResult Edit(int? id)
         {
+            var events1 = db.Events1.Include(l => l.Location).Where(e => e.EventDate > DateTime.UtcNow).OrderBy(e => e.EventDate);
             //Only show owner's trucks for options in the dropdown
             //var userName = User.Identity.GetUserId();
             //if (User.IsInRole("Owner"))
@@ -224,6 +226,7 @@ namespace FTE.UI.MVC.Controllers
             //    }
             //    return View(userRes);
             //}
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -236,7 +239,7 @@ namespace FTE.UI.MVC.Controllers
             else
             {
                 //Reservation reservation = db.Reservations.Find(id);
-                ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes", reservation.EventID);
+                ViewBag.EventID = new SelectList(events1, "EventID", "SelectRes", reservation.EventID);
                 ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "TruckName", reservation.OwnerAssetID);
                 return View(reservation);
             }
