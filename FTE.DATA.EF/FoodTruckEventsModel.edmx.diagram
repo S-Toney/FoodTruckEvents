@@ -16,6 +16,8 @@
         <AssociationConnector Association="FTEDBModel.FK_OwnerAssets_TruckFoodType" ManuallyRouted="false" />
         <AssociationConnector Association="FTEDBModel.FK_OwnerAssets_UserDetails" ManuallyRouted="false" />
         <AssociationConnector Association="FTEDBModel.FK_Reservations_OwnerAssets" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FTEDBModel.AspNetUser" Width="1.5" PointX="0.875" PointY="7.5" />
+        <AssociationConnector Association="FTEDBModel.FK_UserDetails_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

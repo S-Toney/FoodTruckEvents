@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>FoodTruckEventsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Events.cs">
       <DependentUpon>FoodTruckEventsModel.tt</DependentUpon>
     </Compile>

@@ -31,5 +31,6 @@ namespace FTE.DATA.EF
         public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<TruckFoodType> TruckFoodTypes { get; set; }
         public virtual DbSet<UserDetails> UserDetails1 { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

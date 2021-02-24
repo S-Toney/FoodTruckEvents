@@ -26,5 +26,6 @@ namespace FTE.DATA.EF
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OwnerAsset> OwnerAssets { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

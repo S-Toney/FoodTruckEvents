@@ -130,7 +130,7 @@ namespace FTE.UI.MVC.Controllers
         public ActionResult Create([Bind(Include = "ReservationID,OwnerAssetID,EventID,ReservationDate")] Reservation reservation)
         {
             #region Commented out
-// Code below enforces the location's reservatio limit
+            // Code below enforces the location's reservatio limit
             //var limit = from l in db.Locations
             //            where l.LocationID == reservation.Event.LocationID
             //            select l.ReservationLimit;
@@ -145,7 +145,7 @@ namespace FTE.UI.MVC.Controllers
             //}
             //}
             #endregion
-            
+
             if (ModelState.IsValid)
             {
                 //get the event associated to the reservation
@@ -193,11 +193,8 @@ namespace FTE.UI.MVC.Controllers
                 else
                 {
                     ViewBag.ErrorMessageDup = $"* This truck already has a reservation on {ev.EventDate:d}.";
-                    //return View();
                 }
-                //db.Reservations.Add(reservation);
-                //db.SaveChanges();
-                //return RedirectToAction("Index");
+
             }
             if (User.IsInRole("Owner"))
             {
@@ -215,6 +212,18 @@ namespace FTE.UI.MVC.Controllers
         [Authorize(Roles = "SysAdmin, Admin, Owner")]
         public ActionResult Edit(int? id)
         {
+            //Only show owner's trucks for options in the dropdown
+            //var userName = User.Identity.GetUserId();
+            //if (User.IsInRole("Owner"))
+            //{
+            //    List<Reservation> userRes = new List<Reservation>();
+            //    List<OwnerAsset> ListOwnerAsset = db.OwnerAssets.Where(x => x.OwnerID == userName).ToList();
+            //    foreach (OwnerAsset oa in ListOwnerAsset)
+            //    {
+            //        userRes.AddRange(db.Reservations.Where(x => x.OwnerAssetID == oa.OwnerAssetID));
+            //    }
+            //    return View(userRes);
+            //}
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -224,9 +233,13 @@ namespace FTE.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes", reservation.EventID);
-            ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "TruckName", reservation.OwnerAssetID);
-            return View(reservation);
+            else
+            {
+                //Reservation reservation = db.Reservations.Find(id);
+                ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes", reservation.EventID);
+                ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "TruckName", reservation.OwnerAssetID);
+                return View(reservation);
+            }
         }
 
         // POST: Reservations/Edit/5
@@ -241,14 +254,51 @@ namespace FTE.UI.MVC.Controllers
             var ev = db.Events1.Where(e => e.EventID == reservation.EventID).Single();
             if (ModelState.IsValid)
             {
-                reservation.ReservationDate = ev.EventDate;
-                db.Entry(reservation).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var duplicateRes = db.Reservations.Where(x => x.ReservationDate == ev.EventDate && x.OwnerAssetID == reservation.OwnerAssetID);
+                if (duplicateRes.Count() == 0)
+                {
+
+                    if (User.IsInRole("Owner"))
+                    {
+                        int resLoc = ev.LocationID;
+                        //Find the reservation limit for the location
+                        int limit = db.Locations.Where(l => l.LocationID == resLoc).Select(l => l.ReservationLimit).Single();
+                        //Get the number of reservations at the location for the same date
+                        int resNum = db.Reservations.Where(l => l.Event.LocationID == resLoc && ev.EventDate == l.ReservationDate).Count();
+                        //See if the number of reservations is less than the limit
+                        //If < limit then add changes and redirect to index
+                        if (resNum < limit)
+                        {
+                            reservation.ReservationDate = ev.EventDate;
+                            db.Entry(reservation).State = EntityState.Modified;
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            // Otherwise, error message that reservation limit for day & location has been reached
+                            ViewBag.ErrorMessageLimit = $"* {ev.EventName} has reached it's reservation limit for {ev.EventDate:d}.";
+                        }
+                        //return View(reservation);
+                    }
+                    else
+                    {
+                        reservation.ReservationDate = ev.EventDate;
+                        db.Entry(reservation).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    //return View(reservation);
+                }
+                else
+                {
+                    ViewBag.ErrorMessageDup = $"* This truck already has a reservation on {ev.EventDate:d}.";
+                }
+                ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes", reservation.EventID);
+                ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "TruckName", reservation.OwnerAssetID);
+                return View(reservation);
             }
-            ViewBag.EventID = new SelectList(db.Events1, "EventID", "SelectRes", reservation.EventID);
-            ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "TruckName", reservation.OwnerAssetID);
-            return View(reservation);
+            return RedirectToAction("Index", "Reservations");
         }
 
         // GET: Reservations/Delete/5
