@@ -96,3 +96,18 @@ textarea.form-control {
     font-size: 14px;
     outline: none;
 }
+
+/* Toggles */
+.toggle-on.btn {
+    color: #fff;
+    background-color: #f82249;
+    /*padding: 7px 22px;*/
+    /*border-radius: 25px;*/
+    border: 1px solid #f82249;
+    transition: all ease-in-out 0.3s;
+    font-weight: 500;
+    /*margin-left: 8px;*/
+    /*margin-top: 2px;*/
+    /*line-height: 1;*/
+    font-size: 13px;
+}
