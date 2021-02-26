@@ -25,7 +25,7 @@
             <table class="table">
                 <tr class="text-center">
                     <th class="align-middle">
-                        @*@Html.DisplayNameFor(model => model.EventName)*@<input type="checkbox" checked data-toggle="toggle" name ="status" data-on="Scheduled<br>Events" data-off="Cancelled<br>Events" @*data-onstyle="default"*@>
+                        @*@Html.DisplayNameFor(model => model.EventName)*@<input type="checkbox" checked data-toggle="toggle" name ="status" data-on="Scheduled<br>Events" data-off="Cancelled<br>Events" class="switch-input" @*data-onstyle="default"*@>
                     </th>
                     <th class="align-middle">
                         @Html.DisplayNameFor(model => model.EventDate)
@@ -35,8 +35,9 @@
                     </th>
                     <th></th>
                 </tr>
-                @if ()
-                {               
+                <tbody id="eventsTable"></tbody>              
+
+
                     @foreach (var item in Model)
                     {
                         <tr>
@@ -61,9 +62,33 @@
                             </td>
                         </tr>
                     }
-                }
+                
 
             </table>
         </div>
     </div>
 </section>
+@*<script>
+    (function () {
+        $(document).ready(function () {
+            $('.switch-input').on('change', function () {
+                var isChecked = $(this).is(':checked');
+                var selectedData;
+                var $switchLabel = $('.switch-label');
+                console.log('isChecked: ' + isChecked);
+
+                if (isChecked) {
+                    selectedData = $switchLabel.attr('data-on');
+                    console.log("On");
+                } else {
+                    selectedData = $switchLabel.attr('data-off');
+                    console.log("Off");
+                }
+
+                console.log('Selected data: ' + selectedData);
+
+            });
+        });
+
+    })();
+</script>*@
