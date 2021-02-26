@@ -25,7 +25,7 @@
             <table class="table">
                 <tr class="text-center">
                     <th class="align-middle">
-                        @*@Html.DisplayNameFor(model => model.EventName)*@<input type="checkbox" checked data-toggle="toggle" data-on="Scheduled<br>Events" data-off="Cancelled<br>Events" @*data-onstyle="default"*@>
+                        @*@Html.DisplayNameFor(model => model.EventName)*@<input type="checkbox" checked data-toggle="toggle" name ="status" data-on="Scheduled<br>Events" data-off="Cancelled<br>Events" @*data-onstyle="default"*@>
                     </th>
                     <th class="align-middle">
                         @Html.DisplayNameFor(model => model.EventDate)
@@ -35,31 +35,34 @@
                     </th>
                     <th></th>
                 </tr>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td class="align-middle">
-                            <a href="@Url.Action("Details", "Events", new { id=item.EventID })">@Html.DisplayFor(modelItem => item.EventName)</a>
-                        </td>
-                        <td class="text-center align-middle">
-                            @Html.DisplayFor(modelItem => item.EventDate)
-                        </td>
-                        <td class="text-center align-middle">
-                            @Html.DisplayFor(modelItem => item.IsCancelled)
-                        </td>
-                        <td class="text-center align-middle">
-                            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Employee"))
-                            {
-                                <a href="@Url.Action("Edit", "Events", new { id = item.EventID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
-                            }
-                            @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
-                            {
-                                <a href="@Url.Action("Delete", "Events", new { id=item.EventID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
-                            }
-                        </td>
-                    </tr>
+                @if ()
+                {               
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle">
+                                <a href="@Url.Action("Details", "Events", new { id=item.EventID })">@Html.DisplayFor(modelItem => item.EventName)</a>
+                            </td>
+                            <td class="text-center align-middle">
+                                @Html.DisplayFor(modelItem => item.EventDate)
+                            </td>
+                            <td class="text-center align-middle">
+                                @Html.DisplayFor(modelItem => item.IsCancelled)
+                            </td>
+                            <td class="text-center align-middle">
+                                @if (Request.IsAuthenticated && User.IsInRole("SysAdmin") || User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                {
+                                    <a href="@Url.Action("Edit", "Events", new { id = item.EventID })" class="mx-3"><i class="fas fa-pen-square fa-2x"></i></a>
+                                }
+                                @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                                {
+                                    <a href="@Url.Action("Delete", "Events", new { id=item.EventID })" class="mx-3"><i class="fas fa-minus-square fa-2x"></i></a>
+                                }
+                            </td>
+                        </tr>
+                    }
                 }
+
             </table>
         </div>
     </div>
