@@ -547,15 +547,19 @@
                                 <h5 class="card-title text-muted text-uppercase text-center">@item.Location.LocationName</h5>
                                 <h6 class="card-price text-center">@item.EventName</h6>
                                 <h4 class="text-center mt-2">@Html.DisplayFor(modelItem => item.EventDate)</h4>
-                                 @*<hr>
+                                 <hr>
                                 <ul class="fa-ul">
                                 @{
                                     //TODO  Addthe list of trucks already scheduled to be at the event here as well as a truck icon with no name associated to show the remaining available slots
+                                    foreach (var item in Res)
+                                    {
+
+                                    }
                                 }
                                 <li><span class="fa-li"><i class="fas fa-truck"></i></span>Scheduled Truck</li>
                                 <li class="text-muted"><span class="fa-li"><i class="fas fa-truck"></i></span>Available</li>
                                 </ul>
-                                <hr>*@
+                                <hr>
                                 <div class="text-center">
                                     @if (User.Identity.IsAuthenticated)
                                     {

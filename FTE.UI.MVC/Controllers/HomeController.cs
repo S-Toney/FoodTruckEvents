@@ -17,8 +17,21 @@ namespace FTE.UI.MVC.Controllers
 
         public ActionResult Index()
         {
+
+            var ev = db.Events1.Include(r => r.Reservations.Where(e => e.EventID == r.EventID));
+
+            var res = db.OwnerAssets.Include(r => r.Reservations.Where(oa => oa.OwnerAssetID == r.OwnerAssetID ));
+
+            //var resMade = db.Reservations.Where(r => r.ReservationDate == ev.EventDate && r.OwnerAssetID == reservation.OwnerAsset);
+
+
             var events1 = db.Events1.Include(l => l.Location).Where(e => e.EventDate > DateTime.UtcNow).OrderBy(e => e.EventDate);
-            return View(events1);
+            return View(events1, res);
+
+
+
+
+
 
 
         }
