@@ -19,6 +19,8 @@ namespace FTE.UI.MVC.Controllers
         {
             var events1 = db.Events1.Include(l => l.Location).Where(e => e.EventDate > DateTime.UtcNow).OrderBy(e => e.EventDate);
             return View(events1);
+
+
         }
 
         public ActionResult About()
