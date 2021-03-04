@@ -18,15 +18,27 @@ namespace FTE.UI.MVC.Controllers
         public ActionResult Index()
         {
 
-            var ev = db.Events1.Include(r => r.Reservations.Where(e => e.EventID == r.EventID));
+            //var ev = db.Events1.Include(r => r.Reservations.Where(e => e.EventID == r.EventID)).Include(l => l.Location).Where(e => e.EventDate > DateTime.UtcNow).OrderBy(e => e.EventDate);
 
-            var res = db.OwnerAssets.Include(r => r.Reservations.Where(oa => oa.OwnerAssetID == r.OwnerAssetID ));
+            //var res = db.OwnerAssets.Include(r => r.Reservations.Where(oa => oa.OwnerAssetID == r.OwnerAssetID ));
+            //var truckRes = db
 
             //var resMade = db.Reservations.Where(r => r.ReservationDate == ev.EventDate && r.OwnerAssetID == reservation.OwnerAsset);
 
+            var tRes = (from e in db.Events1
+                        join l in db.Locations on e.LocationID equals l.LocationID
+                        join r in db.Reservations on e.EventID equals r.EventID
+                        join o in db.OwnerAssets on r.OwnerAssetID equals o.OwnerAssetID
+                        select new
+                        {
+                            Event = e.EventName,
+                            Date = r.ReservationDate,
+                            Truck = o.OwnerAssetID,
+                            Limit = l.ReservationLimit
+                        }); 
 
             var events1 = db.Events1.Include(l => l.Location).Where(e => e.EventDate > DateTime.UtcNow).OrderBy(e => e.EventDate);
-            return View(events1, res);
+            return View(tRes);
 
 
 
