@@ -21,6 +21,19 @@
         background-color: #0B1126;
     }
 
+.btn-primary {
+    color: #fff;
+    background-color: #f82249;
+    border-color: #f82249;
+    font-size: 1rem;
+}
+    
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #0B1126;
+        border-color: #f82249;
+    }
+
 .pl-03 {
     padding-left: 0.3em;
 }
@@ -59,6 +72,7 @@ a.dropdown-item {
     color: #0E1B4D;
     display: block;
 }
+
 .nav-menu a:hover {
     color: #f82249;
 }
@@ -99,13 +113,14 @@ textarea.form-control {
 
 /* Toggles */
 .toggle-on.btn {
-    color: #fff;
-    background-color: #f82249;
+    /*color: #fff;
+    background-color: #f82249;*/
     /*padding: 7px 22px;*/
     /*border-radius: 25px;*/
-    border: 2px solid #f82249;
+    /*border: 3px solid #f82249!important;
+    border-color: #f82249;
     transition: all ease-in-out 0.3s;
-    font-weight: 500;
+    font-weight: 500;*/
     /*margin-left: 8px;*/
     /*margin-top: 2px;*/
     /*line-height: 1;*/
