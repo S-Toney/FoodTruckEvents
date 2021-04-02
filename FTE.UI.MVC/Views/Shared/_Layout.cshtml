@@ -93,7 +93,30 @@
             <nav id="nav-menu-container">
                 @*<ul class="nav-menu">@Html.Partial("_LoginPartial")</ul>*@
                 <ul class="nav-menu">
-                    <li class="menu-active"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <!--  Admininstration CTA  -->
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li class="buy-tickets"><a href="@Url.Action("Index", "Locations")">Locations</a></li>
+                    }
+
+                    <!--  Employee CTA  -->
+                    @if (Request.IsAuthenticated && User.IsInRole("Employee"))
+                    {
+                        <li class="buy-tickets"><a href="@Url.Action("Index", "Events")">Events</a></li>
+                    }
+
+                    <!--  Owner CTA  -->
+                    @if (Request.IsAuthenticated && User.IsInRole("Owner"))
+                    {
+                        <li class="buy-tickets"><a href="@Url.Action("Index", "Reservations")">Event Scheduler</a></li>
+                    }
+
+                    <!--  System Admin CTA  -->
+                    @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
+                    {
+                        <li class="buy-tickets"><a href="@Url.Action("Index", "UsersAdmin")">Users Admin</a></li>
+                    }
+                    @*<li class="menu-active"><a href="@Url.Action("Index", "Home")">Home</a></li>*@
                     <li><a href="@Url.Action("About", "Home")">About</a></li>
                     <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
 
@@ -195,29 +218,7 @@
 
                     @*<li><a href="@Url.Action("Login", "Account")">Login</a></li>*@
 
-                    <!--  Admininstration CTA  -->
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        <li class="buy-tickets"><a href="@Url.Action("Index", "Locations")">Locations</a></li>
-                    }
 
-                    <!--  Employee CTA  -->
-                    @if (Request.IsAuthenticated && User.IsInRole("Employee"))
-                    {
-                        <li class="buy-tickets"><a href="@Url.Action("Index", "Events")">Events</a></li>
-                    }
-
-                    <!--  Owner CTA  -->
-                    @if (Request.IsAuthenticated && User.IsInRole("Owner"))
-                    {
-                        <li class="buy-tickets"><a href="@Url.Action("Index", "Reservations")">Event Scheduler</a></li>
-                    }
-
-                    <!--  System Admin CTA  -->
-                    @if (Request.IsAuthenticated && User.IsInRole("SysAdmin"))
-                    {
-                        <li class="buy-tickets"><a href="@Url.Action("Index", "UsersAdmin")">Users Admin</a></li>
-                    }
 
                 </ul>
             </nav>
